@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Event</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-</head>
+    <script src="https://kit.fontawesome.com/8f7ff4ed0e.js" crossorigin="anonymous"></script>
+  </head>
 <body>
 
     <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -69,31 +70,46 @@
 
 
     <div class="container is-fluid" style = "margin-top: 10px;">
+      <form id= "createEventForm" action = "" method= "post"> 
+        {% csrf_token %}
         <div class="field">
             <label class="label">Name</label>
-            <div class="control">
-                <input class="input" type="text" placeholder="Event name">
-            </div>
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Event name">
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+          </div>
         </div>
-        
+
+      
         <div class="field">
             <label class="label">Location</label>
-            <div class="control">
+            <div class="control has-icons-left">
                 <input class="input" type="text" placeholder="Location" >
+                <span class = "icon is-left">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                </span>
             </div>
         </div>
 
         <div class="field">
             <label class="label">Date</label>
-            <div class="control">
-                <input class="input" type="text" placeholder="Enter Date">
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Enter Date">
+              <span class = "icon is-left">
+                <i class="fa-solid fa-calendar-days"></i>
+              </span>
             </div>
         </div>
         
         <div class="field">
             <label class="label">Time</label>
-            <div class="control">
-                <input class="input" type="text" placeholder="Enter Time" >
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Enter Time" >
+              <span class = "icon is-left">
+                <i class="fa-solid fa-clock"></i>
+              </span>
             </div>
         </div>
         
@@ -109,20 +125,22 @@
         <div class = "field is-grouped">
             <div class="control">
                 <button class="button is-link is-medium js-modal-trigger" data-target="addTaskModal">
-                    Add Tasks
+                <span style = "margin-right: 7px;">Add Tasks</span>
+                <i class="fa-solid fa-plus"></i> 
+                
                 </button>
             </div>
         </div>
         
         <div class="field is-grouped">
             <div class="control">
-                <button class="button is-primary">Submit</button>
+                <button class="button is-primary" type = "submit">Create!</button>
             </div>
             <div class="control">
                 <button class="button is-link is-light">Cancel</button>
             </div>
-
         </div>
+      </form>
     </div>
 </body>
 </html>
