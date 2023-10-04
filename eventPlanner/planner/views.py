@@ -14,3 +14,6 @@ def events(request):
 #event detail view: viewing a specific event
 def event(request):
     return render(request, 'eventDetail.html')
+
+def createEvent(request):
+    return render(request, 'createEvent.html')
