@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/8f7ff4ed0e.js" crossorigin="anonymous"></script>
+    {% load static %}
+    
+  </head>
+<body>
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="https://bulma.io">
+            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href = {% url "home" %}>
+              Home
+            </a>
+
+            <a class="navbar-item" href = {% url "events" %}>
+              Events
+            </a>
+
+            <a class="navbar-item" href = {% url "createEvent" %}>
+                Plan
+              </a>
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button is-primary">
+                  <strong>Sign up</strong>
+                </a>
+                <a class="button is-light">
+                  Log in
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
+
+
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+            <h1 class="title">
+              <i class="fa-solid fa-calendar-days"></i>
+              Create Event
+            </h1>
+            <h2 class="subtitle">
+                Plan something new!
+            </h2>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container is-fluid" style = "margin-top: 10px;">
+      <form id= "createEventForm" action = "" method= "post"> 
+        {% csrf_token %}
+        <div class="field">
+            <label class="label">Name</label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Event name">
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+          </div>
+        </div>
+
+      
+        <div class="field">
+            <label class="label">Location</label>
+            <div class="control has-icons-left">
+                <input class="input" type="text" placeholder="Location" >
+                <span class = "icon is-left">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Date</label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Enter Date">
+              <span class = "icon is-left">
+                <i class="fa-solid fa-calendar-days"></i>
+              </span>
+            </div>
+        </div>
+        
+        <div class="field">
+            <label class="label">Time</label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Enter Time" >
+              <span class = "icon is-left">
+                <i class="fa-solid fa-clock"></i>
+              </span>
+            </div>
+        </div>
+        
+      
+
+        <div class="field">
+            <label class="label">Description</label>
+            <div class="control">
+                <textarea class="textarea" placeholder="Describe your event."></textarea>
+            </div>
+        </div>
+
+        <div class="field" style = "display:none; "> 
+          <label class="label">Tasks</label>
+          <div class="control">
+              <textarea class="textarea" placeholder="Describe your event."></textarea>
+          </div>
+        </div>
+        
+        <div class="modal" id = "addTask">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Add Tasks</p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <h1 class = "subtitle">Add Task</h1>
+              <input class="input is-primary" type="text" placeholder="Primary input">
+            </section>
+            <footer class="modal-card-foot">
+              <button class="button is-success">Add</button>
+              <button class="button">Cancel</button>
+            </footer>
+          </div>
+        </div>
+
+        <div class = "field is-grouped">
+            <div class="control">
+                <button class="button is-link is-medium js-modal-trigger" type="button" data-target="addTask">
+                  <span style = "margin-right: 7px;">Add Tasks</span>
+                  <i class="fa-solid fa-plus"></i> 
+                </button>
+            </div>
+        </div>
+        
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-primary" type="submit">Create!</button>
+            </div>
+            <div class="control">
+                <button class="button is-light" type = "button">Cancel</button>
+            </div>
+        </div>
+      </form>
+    </div>
+
+  
+
+    {% load static %}
+    <script src="{% static 'app.js' %}"></script>
+</body>
+</html>
