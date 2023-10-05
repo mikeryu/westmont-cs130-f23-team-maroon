@@ -6,6 +6,8 @@
     <title>Create Event</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <script src="https://kit.fontawesome.com/8f7ff4ed0e.js" crossorigin="anonymous"></script>
+    {% load static %}
+    
   </head>
 <body>
 
@@ -59,7 +61,8 @@
         <div class="hero-body">
             <div class="container">
             <h1 class="title">
-                Create Event
+              <i class="fa-solid fa-calendar-days"></i>
+              Create Event
             </h1>
             <h2 class="subtitle">
                 Plan something new!
@@ -122,25 +125,54 @@
             </div>
         </div>
 
+        <div class="field" style = "display:none; "> 
+          <label class="label">Tasks</label>
+          <div class="control">
+              <textarea class="textarea" placeholder="Describe your event."></textarea>
+          </div>
+        </div>
+        
+        <div class="modal" id = "addTask">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Add Tasks</p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <h1 class = "subtitle">Add Task</h1>
+              <input class="input is-primary" type="text" placeholder="Primary input">
+            </section>
+            <footer class="modal-card-foot">
+              <button class="button is-success">Add</button>
+              <button class="button">Cancel</button>
+            </footer>
+          </div>
+        </div>
+
         <div class = "field is-grouped">
             <div class="control">
-                <button class="button is-link is-medium js-modal-trigger" data-target="addTaskModal">
-                <span style = "margin-right: 7px;">Add Tasks</span>
-                <i class="fa-solid fa-plus"></i> 
-                
+                <button class="button is-link is-medium js-modal-trigger" type="button" data-target="addTask">
+                  <span style = "margin-right: 7px;">Add Tasks</span>
+                  <i class="fa-solid fa-plus"></i> 
                 </button>
             </div>
         </div>
         
         <div class="field is-grouped">
             <div class="control">
-                <button class="button is-primary" type = "submit">Create!</button>
+                <button class="button is-primary" type="submit">Create!</button>
             </div>
             <div class="control">
-                <button class="button is-link is-light">Cancel</button>
+                <button class="button is-light" type = "button">Cancel</button>
             </div>
         </div>
       </form>
     </div>
+
+  
+
+    {% load static %}
+    <script src="{% static 'app.js' %}"></script>
 </body>
 </html>
