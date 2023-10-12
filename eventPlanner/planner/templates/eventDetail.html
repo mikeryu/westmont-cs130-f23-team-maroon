@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/8f7ff4ed0e.js" crossorigin="anonymous"></script>
+    {% load static %}
+</head>
+<body> 
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="https://bulma.io">
+            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href = {% url "home" %}>
+              Home
+            </a>
+
+            <a class="navbar-item" href = {% url "events" %}>
+              Events
+            </a>
+
+            <a class="navbar-item" href = {% url "createEvent" %}>
+                Plan
+              </a>
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button is-primary">
+                  <strong>Sign up</strong>
+                </a>
+                <a class="button is-light">
+                  Log in
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </nav>
+
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+            <h1 class="title">
+              <i class="fa-solid fa-book"></i>
+              Event Name
+            </h1>
+            <h2 class="subtitle">
+                Here are the details for your event!
+            </h2>
+            </div>
+        </div>
+    </section>
+    
+    <div class="container is-fluid">
+        <h1 class="title">Event Host</h1>
+        <h2 class="subtitle ml-3">Event Host name here</h2>
+       
+        <h1 class="title">Event Location</h1>
+        <h2 class="subtitle ml-3">Event Location name here</h2>
+
+        <h1 class="title">Event Date</h1>
+        <h2 class="subtitle ml-3">Event Date name here</h2>
+
+        <h1 class="title">Event Time</h1>
+        <h2 class="subtitle ml-3">Event Time  here</h2>
+
+        <h1 class="title">Event Description</h1>
+        <h2 class="subtitle ml-3">Event Description  here</h2>
+
+        <h1 class="title">Needed Tasks</h1>
+        <h2 class="subtitle ml-3">Needed Tasks here</h2>
+
+        <button class="button ml-3">RSVP</button>
+    </div>
+
+
+
+</body>
