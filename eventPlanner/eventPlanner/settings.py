@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'eventPlanner',
         'USER': 'django',
         'PASSWORD': 'password',
-        'HOST': localhost,
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
