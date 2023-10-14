@@ -1,0 +1,35 @@
+
+{% extends "base.html" %}
+
+{%block content %}
+
+    <section class="hero is-primary">
+        <div class="hero-body is-6">
+            <div class="container has-text-centered">
+            <h1 class="title">
+                Home
+            </h1>
+            <h2 class="subtitle">
+                Welcome to (name TBD)
+            </h2>
+            </div>
+        </div>
+    </section>
+    <div>
+  <br>
+    <div class="columns is-centered">
+      <div class="column is-4">
+        <div class="BroseEvents-Button">
+          <button class="button is-primary is-outlined"> <a href = {% url "events" %}>Browse Events</a></button>
+        </div>
+      </div>
+      <div class="BroseEvents-Button">
+        <button class="button is-primary is-outlined"><a href= {% url "createEvent" %}> My Events</a></button>
+      </div>
+      </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+
