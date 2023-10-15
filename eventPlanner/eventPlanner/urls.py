@@ -15,8 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls), 
     path('', include('planner.urls')), 
+    #Map url to home page
+    path('home/', views.home , name ='home'),
+    #Map url to Events page
+    path('events/', views.events , name ='events'),
+    #Map url to Create Events page
+    path('createEvent/', views.createEvents , name ='createEvent'),
+
+
+
 ]
