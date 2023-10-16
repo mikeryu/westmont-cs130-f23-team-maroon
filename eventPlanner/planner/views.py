@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from .models import Event
 
 
 # Create your views here.
@@ -9,7 +10,10 @@ def home(request):
 
 #browse events view
 def events(request):
-    return render(request, 'browseEvents.html')
+    events = Event.objects.all()
+    context = {'events': events}
+
+    return render(request, 'browseEvents.html', context)
 
 #event detail view: viewing a specific event
 def event(request):
