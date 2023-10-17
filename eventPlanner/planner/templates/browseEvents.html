@@ -17,14 +17,16 @@
   <div class="columns is-multiline">
     {% for event in events %}
     <div class="column is-one-third">
-      <div class="box">
-        <p class="title">{{event.name}}</p>
-        <div class="tags">
-          <span class="tag">{{event.location}}</span>
+      <a href = {% url "event" event.id%}> 
+        <div class="box">
+          <p class="title">{{event.name}}</p>
+          <div class="tags">
+            <span class="tag">{{event.location}}</span>
+          </div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor
+            vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
         </div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor
-          vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>:
-      </div>
+      </a>
     </div>
     {% endfor %}
   </div>
