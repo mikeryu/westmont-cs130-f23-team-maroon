@@ -21,12 +21,13 @@
 
 
     <div class="container is-fluid mt-4">
+      <div class = "column is-two-thirds"> 
       <form id= "createEventForm" action = "" method= "post"> 
         {% csrf_token %}
         <div class="field">
             <label class="label">Name</label>
             <div class="control has-icons-left">
-              <input class="input" type="text" placeholder="Event name">
+              <input class="input is-rounded" type="text" placeholder="Event name">
               <span class="icon is-small is-left">
                 <i class="fas fa-flag"></i>
               </span>
@@ -36,7 +37,7 @@
         <div class="field">
           <label class="label">Host</label>
           <div class="control has-icons-left">
-            <input class="input" type="text" placeholder="Enter your name">
+            <input class="input is-rounded" type="text" placeholder="Enter your name">
             <span class="icon is-small is-left">
               <i class="fas fa-user"></i>
             </span>
@@ -50,7 +51,7 @@
         <div class="field">
             <label class="label">Location</label>
             <div class="control has-icons-left">
-                <input class="input" type="text" placeholder="Location" >
+                <input class="input is-rounded" type="text" placeholder="Location" >
                 <span class = "icon is-left">
                   <i class="fa-solid fa-map-location-dot"></i>
                 </span>
@@ -60,7 +61,7 @@
         <div class="field">
             <label class="label">Date</label>
             <div class="control has-icons-left">
-              <input class="input" type="text" placeholder="Enter Date">
+              <input class="input is-rounded" type="text" placeholder="Enter Date">
               <span class = "icon is-left">
                 <i class="fa-solid fa-calendar-days"></i>
               </span>
@@ -70,7 +71,7 @@
         <div class="field">
             <label class="label">Time</label>
             <div class="control has-icons-left">
-              <input class="input" type="text" placeholder="Enter Time" >
+              <input class="input is-rounded" type="text" placeholder="Enter Time" >
               <span class = "icon is-left">
                 <i class="fa-solid fa-clock"></i>
               </span>
@@ -86,10 +87,11 @@
             </div>
         </div>
 
-        <div class="field" style = "display:none; "> 
+        <div class="field"> 
           <label class="label">Tasks</label>
           <div class="control">
-              <textarea class="textarea" placeholder="Describe your event."></textarea>
+            <div  id = "tasks" class = 'is-one-fifth'>
+            </div>
           </div>
         </div>
         
@@ -101,19 +103,19 @@
               <button class="delete" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
-              <h1 class = "subtitle">Add Task</h1>
-              <input class="input is-primary" type="text" placeholder="Enter your task.">
+              <h1 class = "subtitle">Enter Task</h1>
+              <input id = "taskInput" class="input is-primary" type="text" placeholder="Enter your task.">
             </section>
             <footer class="modal-card-foot">
-              <button class="button is-success">Add</button>
-              <button class="button">Cancel</button>
+              <button id = "addTaskButton" type = "button" class="button is-success">Add</button>
+              <button type = "button" class="button">Cancel</button>
             </footer>
           </div>
         </div>
 
         <div class = "field is-grouped">
             <div class="control">
-                <button class="button is-link is-medium js-modal-trigger" type="button" data-target="addTask">
+                <button class="button is-link js-modal-trigger" type="button" data-target="addTask">
                   <span class = "mr-2">Add Tasks</span>
                   <i class="fa-solid fa-plus"></i> 
                 </button>
@@ -130,10 +132,12 @@
         </div>
       </form>
     </div>
+    </div>
 
   
 
     {% load static %}
-    <script src="{% static 'app.js' %}"></script>
+   
 
     {% endblock %}
+    
