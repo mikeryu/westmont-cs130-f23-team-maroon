@@ -1,5 +1,19 @@
 console.log("app.js working");
 
+
+
+
+$(document).ready(function() {
+  $("#addTaskButton").click(function() {
+    let task = $("#taskInput").val();
+    if(task != ""){
+      $('#tasks').addClass('column');
+      $('#tasks').append("<input name ='task-item' class='input is-rounded my-1' type='text' value='" + task + "' />"); 
+    }
+  }); 
+}); 
+
+
 document.addEventListener('DOMContentLoaded', () => {
     // Functions to open and close a modal
     function openModal($el) {
@@ -42,3 +56,5 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+
