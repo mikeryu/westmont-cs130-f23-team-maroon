@@ -1,7 +1,7 @@
 from django import forms
 from .models import Event
 
-class CreateEventForm()
+class CreateEventForm(forms.Form): 
     event_name = forms.CharField(label="Event name", max_length=100)
     event_host = forms.CharField(label="Enter your name", max_length=100)
     event_location = forms.CharField(label="Location", max_length=100)
