@@ -8,7 +8,7 @@
             <div class="container">
             <h1 class="title">
               <i class="fa-solid fa-book"></i>
-              {{event.name}}
+              View Event
             </h1>
             <h2 class="subtitle">
                 Here are the details for your event!
@@ -18,25 +18,29 @@
     </section>
     
     <div class="container is-fluid">
-        <h1 class="title">Host</h1>
-        <h2 class="subtitle ml-3">Event Host</h2>
-       
-        <h1 class="title">Location</h1>
-        <h2 class="subtitle ml-3">{{event.location}}</h2>
+        <div class = "columns mt-3">
+        <div class = "column is-two-thirds" >
+            <h1 class="title m-2">{{event.name}}</h1>
+            
 
-        <h1 class="title">Date</h1>
-        <h2 class="subtitle ml-3">{{event.date}}</h2>
+            <p class = "m-2"> <i class="fas fa-user"></i> Brought to you by: Event Host</p>
+        
+            <p class = "m-2"> <i class="fa-solid fa-map-location-dot"></i> {{event.location}}</p>
 
-        <h1 class="title">Time</h1>
-        <h2 class="subtitle ml-3">{{event.time}}</h2>
+            <p class = "m-2"> <i class="fa-regular fa-clock"></i> {{event.date}} at {{event.time}}</p>
 
-        <h1 class="title">Description</h1>
-        <h2 class="subtitle ml-3">Event Description</h2>
+            <p class = "m-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu lobortis elementum nibh tellus molestie nunc non blandit. Sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Eget egestas purus viverra accumsan in. Massa vitae tortor condimentum lacinia quis vel. Lectus quam id leo in vitae turpis massa sed elementum. Eu feugiat pretium nibh ipsum consequat nisl vel pretium. Non sodales neque sodales ut. Eget felis eget nunc lobortis mattis aliquam faucibus purus. Pharetra massa massa ultricies mi quis.</p>
+ 
 
-        <h1 class="title">Tasks</h1>
-        <h2 class="subtitle ml-3">Needed Tasks here</h2>
+            <button class="button is-primary ml-3 m-2">RSVP!</button>
+        </div>
 
-        <button class="button ml-3">RSVP</button>
+        <div class = "column">
+            <h1 class="title m-2">Attendees</h1>
+            <p class = "ml-2 m-1">Alice</p>
+            <p class = "ml-2 m-1">Bob</p>
+        </div>
+        </div>
     </div>
 
 {% endblock %}
