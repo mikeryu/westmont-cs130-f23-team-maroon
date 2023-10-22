@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Event
 from django.http import Http404
-
+from .forms import RSVPForm
 
 # Create your views here.
 
@@ -20,10 +20,17 @@ def events(request):
 def event(request, id):
     try: 
         event = Event.objects.get(id=id)
+
+        form = RSVPForm(request.POST or None)
+        if request.method == "POST":
+            if form.is_valid():
+                rsvp = form.save(commit=False)
+                rsvp.event = event
+                rsvp.save()
+        context = {'event': event, 'form': form}
+    
     except Event.DoesNotExist:
         return redirect('events')
-    
-    context = {'event': event}
     
     return render(request, 'eventDetail.html', context)
 

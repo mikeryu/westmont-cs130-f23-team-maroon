@@ -1,42 +1,67 @@
-
 {% extends "base.html" %}
 
 {%block content %}
 
-    <section class="hero is-primary">
-        <div class="hero-body">
-            <div class="container">
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
             <h1 class="title">
-              <i class="fa-solid fa-book"></i>
-              {{event.name}}
+                <i class="fa-solid fa-book"></i>
+                {{event.name}}
             </h1>
             <h2 class="subtitle">
                 Here are the details for your event!
             </h2>
-            </div>
         </div>
-    </section>
-    
-    <div class="container is-fluid">
-        <h1 class="title">Host</h1>
-        <h2 class="subtitle ml-3">Event Host</h2>
-       
-        <h1 class="title">Location</h1>
-        <h2 class="subtitle ml-3">{{event.location}}</h2>
-
-        <h1 class="title">Date</h1>
-        <h2 class="subtitle ml-3">{{event.date}}</h2>
-
-        <h1 class="title">Time</h1>
-        <h2 class="subtitle ml-3">{{event.time}}</h2>
-
-        <h1 class="title">Description</h1>
-        <h2 class="subtitle ml-3">Event Description</h2>
-
-        <h1 class="title">Tasks</h1>
-        <h2 class="subtitle ml-3">Needed Tasks here</h2>
-
-        <button class="button ml-3">RSVP</button>
     </div>
+</section>
+
+<div class="container is-fluid">
+    <h1 class="title">Host</h1>
+    <h2 class="subtitle ml-3">Event Host</h2>
+
+    <h1 class="title">Location</h1>
+    <h2 class="subtitle ml-3">{{event.location}}</h2>
+
+    <h1 class="title">Date</h1>
+    <h2 class="subtitle ml-3">{{event.date}}</h2>
+
+    <h1 class="title">Time</h1>
+    <h2 class="subtitle ml-3">{{event.time}}</h2>
+
+    <h1 class="title">Description</h1>
+    <h2 class="subtitle ml-3">Event Description</h2>
+
+    <h1 class="title">Tasks</h1>
+    <h2 class="subtitle ml-3">Needed Tasks here</h2>
+
+    <button class="button ml-3 js-modal-trigger" data-target="rsvp">RSVP</button>
+</div>
+
+<div class="modal" id="rsvp">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">RSVP</p>
+            <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="button is-success is-fullwidth is-medium mt-5" type="submit">
+                    RSVP
+                </button>
+            </form>
+        </section>
+        <footer class="modal-card-foot">
+            <button type="button" class="button is-success">RSVP</button>
+            <button type="button" class="button">Cancel</button>
+        </footer>
+    </div>
+</div>
+
+{% load static %}
+
 
 {% endblock %}
