@@ -19,24 +19,21 @@
 <div class="modal" id="rsvp">
     <div class="modal-background"></div>
     <div class="modal-card">
-        <header class="modal-card-head">
-            <p class="modal-card-title">RSVP</p>
-            <button class="delete" aria-label="close"></button>
-        </header>
-        <section class="modal-card-body">
-            <form method="post">
+        <form method="post">
+            <header class="modal-card-head">
+                <p class="modal-card-title">RSVP</p>
+                <button class="delete" type="button" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="button is-success is-fullwidth is-medium mt-5" type="submit">
-                    RSVP
-                </button>
-            </form>
-        </section>
-        <footer class="modal-card-foot">
-            <button type="button" class="button is-success">RSVP</button>
-            <button type="button" class="button">Cancel</button>
-        </footer>
-        </section>
+            </section>
+            <footer class="modal-card-foot">
+                <button type="submit" class="button is-success">RSVP</button>
+                <button type="button" class="button">Cancel</button>
+            </footer>
+            </section>
+        </form>
     </div>
 </div>
 
@@ -65,8 +62,9 @@
 
         <div class="column">
             <h1 class="title m-2">Attendees</h1>
-            <p class="ml-2 m-1">Alice</p>
-            <p class="ml-2 m-1">Bob</p>
+            {% for attendee in attendees%}
+            <p class="ml-2 m-1">{{attendee.name}}</p>
+            {% endfor %}
         </div>
     </div>
 </div>

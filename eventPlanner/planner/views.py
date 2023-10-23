@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import Event
+from .models import Event, RSVP
 from django.http import Http404
 from .forms import RSVPForm
 
@@ -20,14 +20,14 @@ def events(request):
 def event(request, id):
     try: 
         event = Event.objects.get(id=id)
-
+        attendees = RSVP.objects.filter(event=event).values()
         form = RSVPForm(request.POST or None)
         if request.method == "POST":
             if form.is_valid():
                 rsvp = form.save(commit=False)
                 rsvp.event = event
                 rsvp.save()
-        context = {'event': event, 'form': form}
+        context = {'event': event, 'form': form, 'attendees': attendees}
     
     except Event.DoesNotExist:
         return redirect('events')
