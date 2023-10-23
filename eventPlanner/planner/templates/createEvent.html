@@ -22,7 +22,7 @@
 
     <div class="container is-fluid mt-4">
       <div class = "column is-two-thirds"> 
-      <form id= "createEventForm" action = "" method= "post"> 
+      <form id= "createEventForm" action = "{% url createEvent %}" method= "post"> 
         {% csrf_token %}
         <div class="field">
             <label class="label">Name</label>
