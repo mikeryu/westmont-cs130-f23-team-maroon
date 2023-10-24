@@ -1,34 +1,23 @@
 
 {% extends "base.html" %}
 
-{%block content %}
+{% block class %}
+class = "background"
+{% endblock class %}
 
-    <section class="hero is-primary">
-        <div class="hero-body is-6">
-            <div class="container has-text-centered">
-            <h1 class="title">
-                Home
-            </h1>
-            <h2 class="subtitle">
-                Welcome to (name TBD)
-            </h2>
-            </div>
-        </div>
-    </section>
-    <div>
-  <br>
-    <div class="columns is-centered">
-      <div class="column is-4">
-        <div class="BroseEvents-Button">
-          <button class="button is-primary is-outlined"> <a href = {% url "events" %}>Browse Events</a></button>
-        </div>
-      </div>
-      <div class="BroseEvents-Button">
-        <button class="button is-primary is-outlined"><a href= {% url "createEvent" %}> My Events</a></button>
-      </div>
-      </div>
-    </div>
-    </div>
+
+{%block content %}
+  
+  <div class="container m-5" id = "homePage">
+    <h1 id="homePageText" class="title ml-4"><span class = "has-text-primary">Eventful.</span> A place were you can take control of your events.</h1>
+    <h1 class = "title ml-4">Checkout upcoming events now!</h1>
+    <div class = "ml-4">
+      <a href = {% url "events" %} class="button is-primary "> View Events</a>
+      <a href = "{% url "createEvent" %}" class = "button is-outlined is-primary">Create Events</a>
+    </div> 
+  </div>
+
+  
 
 {% endblock %}
 
