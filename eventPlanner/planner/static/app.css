@@ -8,9 +8,11 @@
 
 html, body{
    height: 100%;
+}
+
+body.background{
    background-image: url("./home.svg");
    background-repeat: no-repeat;
    background-size: cover;
    background-position: bottom;
 }
-
