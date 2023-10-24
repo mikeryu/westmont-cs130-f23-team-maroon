@@ -15,4 +15,12 @@ body.background{
    background-repeat: no-repeat;
    background-size: cover;
    background-position: bottom;
+
 }
+
+@media(max-width: 768px){
+   body.background{
+      background-image: none;
+   }
+}
+
