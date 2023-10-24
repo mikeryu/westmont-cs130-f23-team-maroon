@@ -1,3 +1,16 @@
 #navbarLogo{
    max-height:45px;
 }
+
+#homePageText{
+   font-size:400%;
+}
+
+html, body{
+   height: 100%;
+   background-image: url("./home.svg");
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: bottom;
+}
+
