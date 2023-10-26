@@ -1,7 +1,7 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import Event
 from django.http import Http404, HttpResponseRedirect
-from .forms import CreateEventForm
+from .forms import CreateEventForm2
 # from django.shortcuts import render
 
 
@@ -30,10 +30,18 @@ def event(request, id):
     return render(request, 'eventDetail.html', context)
 
 def createEvent(request):
-
+    
+    
     if request.method == "POST":
         
-
+        name = request.POST["name"]
+        host = request.POST["host"]
+        location = request.POST["location"]
+        date = request.POST["date"]
+        time = request.POST["time"]
+        event = Event(name=name, host=host, location=location, date=date, time=time)
+        event.save()
+        
         return redirect('events')
 
     return render(request, 'createEvent.html')

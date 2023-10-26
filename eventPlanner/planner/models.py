@@ -8,6 +8,7 @@ from django.db import models
 #descbribes an specifc event with a name, data, time and location
 class Event(models.Model):
     name = models.CharField(max_length=250)
+    host = models.CharField(max_length= 100, default="Joe")
     date = models.CharField(max_length=100) #Need to be updated to DateField in future release
     time = models.CharField(max_length=100)  #Need to be updated to TimeField in future release
     location = models.CharField(max_length=100)

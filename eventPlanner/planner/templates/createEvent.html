@@ -22,12 +22,12 @@
 
     <div class="container is-fluid mt-4">
       <div class = "column is-two-thirds"> 
-      <form id= "createEventForm" action = "{% url createEvent %}" method= "post"> 
+      <form id= "createEventForm" action = "{% url 'createEvent' %}" method= "post"> 
         {% csrf_token %}
         <div class="field">
             <label class="label">Name</label>
             <div class="control has-icons-left">
-              <input class="input is-rounded" type="text" placeholder="Event name">
+              <input class="input is-rounded" type="text" placeholder="Event name" name="name">
               <span class="icon is-small is-left">
                 <i class="fas fa-flag"></i>
               </span>
@@ -37,7 +37,7 @@
         <div class="field">
           <label class="label">Host</label>
           <div class="control has-icons-left">
-            <input class="input is-rounded" type="text" placeholder="Enter your name">
+            <input class="input is-rounded" type="text" placeholder="Enter your name" name="host">
             <span class="icon is-small is-left">
               <i class="fas fa-user"></i>
             </span>
@@ -51,7 +51,7 @@
         <div class="field">
             <label class="label">Location</label>
             <div class="control has-icons-left">
-                <input class="input is-rounded" type="text" placeholder="Location" >
+                <input class="input is-rounded" type="text" placeholder="Location" name="location">
                 <span class = "icon is-left">
                   <i class="fa-solid fa-map-location-dot"></i>
                 </span>
@@ -61,7 +61,7 @@
         <div class="field">
             <label class="label">Date</label>
             <div class="control has-icons-left">
-              <input class="input is-rounded" type="text" placeholder="Enter Date">
+              <input class="input is-rounded" type="text" placeholder="Enter Date" name="date">
               <span class = "icon is-left">
                 <i class="fa-solid fa-calendar-days"></i>
               </span>
@@ -71,7 +71,7 @@
         <div class="field">
             <label class="label">Time</label>
             <div class="control has-icons-left">
-              <input class="input is-rounded" type="text" placeholder="Enter Time" >
+              <input class="input is-rounded" type="text" placeholder="Enter Time" name="time">
               <span class = "icon is-left">
                 <i class="fa-solid fa-clock"></i>
               </span>
@@ -129,43 +129,6 @@
             <div class="control">
                 <button class="button is-light" type = "button">Cancel</button>
             </div>
-        </div>
-      </form>
-
-      <!-- Creating a form using forms.py to see if it works better lol-->
-       <form id= "createEventForm" action = "" method= "post"> 
-        <div> 
-          {{ form.non_field_errors }}
-          <div class="fieldWrapper">
-              {{ form.event_name.errors }}
-              <label for="{{ form.event_name.id_for_label }}">Event Name</label>
-              {{ form.event_name }}
-          </div>
-          <div class="fieldWrapper">
-              {{ form.event_host.errors }}
-              <label for="{{ form.event_host.id_for_label }}">Enter your name</label>
-              {{ form.event_host }}
-          </div>
-          <div class="fieldWrapper">
-              {{ form.event_location.errors }}
-              <label for="{{ form.event_location.id_for_label }}">Event Location</label>
-              {{ form.event_location }}
-          </div>
-          <div class="fieldWrapper">
-              {{ form.event_date.errors }}
-              <label for="{{ form.event_date.id_for_label }}">Event Date</label>
-              {{ form.event_date }}
-          </div>
-          <div class="fieldWrapper">
-            {{ form.event_time.errors }}
-            <label for="{{ form.event_time.id_for_label }}">Event Time</label>
-            {{ form.event_time }}
-        </div>
-        <div class="fieldWrapper">
-            {{ form.event_description.errors }}
-            <label for="{{ form.event_description.id_for_label }}">Describe your event</label>
-            {{ form.event_description }}
-        </div>
         </div>
       </form>
       
