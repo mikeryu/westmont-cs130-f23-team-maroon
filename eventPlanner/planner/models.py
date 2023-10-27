@@ -12,10 +12,10 @@ class Event(models.Model):
     date = models.CharField(max_length=100) #Need to be updated to DateField in future release
     time = models.CharField(max_length=100)  #Need to be updated to TimeField in future release
     location = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000, default="Lorem ipsum blah blah blah")
 
     """
     Features to be added in future releases
-    description = models.CharField(max_length=1000) 
     capacity = models.IntegerField() 
     image = models.ImageField(upload_to='images/') 
     """
@@ -32,3 +32,12 @@ class Task(models.Model):
     def __str__(self):
         return self.name
     
+# rsvp class
+# stores a singular RSVP for a given event
+class RSVP(models.Model):
+    name = models.CharField(max_length=50)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+

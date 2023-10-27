@@ -1,46 +1,69 @@
-
 {% extends "base.html" %}
 
 {%block content %}
 
-    <section class="hero is-primary">
-        <div class="hero-body">
-            <div class="container">
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
             <h1 class="title">
-              <i class="fa-solid fa-book"></i>
-              View Event
+                <i class="fa-solid fa-book"></i>
+                View Event
             </h1>
             <h2 class="subtitle">
                 Here are the details for your event!
             </h2>
-            </div>
-        </div>
-    </section>
-    
-    <div class="container is-fluid">
-        <div class = "columns mt-3">
-        <div class = "column is-two-thirds" >
-            <h1 class="title m-2">{{event.name}}</h1>
-            
-
-            <p class = "m-2"> <i class="fas fa-user"></i> Brought to you by: {{event.host}}</p>
-        
-            <p class = "m-2"> <i class="fa-solid fa-map-location-dot"></i> {{event.location}}</p>
-
-            <p class = "m-2"> <i class="fa-regular fa-clock"></i> {{event.date}} at {{event.time}}</p>
-
-            <p class = "m-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu lobortis elementum nibh tellus molestie nunc non blandit. Sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Eget egestas purus viverra accumsan in. Massa vitae tortor condimentum lacinia quis vel. Lectus quam id leo in vitae turpis massa sed elementum. Eu feugiat pretium nibh ipsum consequat nisl vel pretium. Non sodales neque sodales ut. Eget felis eget nunc lobortis mattis aliquam faucibus purus. Pharetra massa massa ultricies mi quis.</p>
- 
-
-            <button class="button is-primary ml-3 m-2">RSVP!</button>
-        </div>
-
-        <div class = "column">
-            <h1 class="title m-2">Attendees</h1>
-            <p class = "ml-2 m-1">Alice</p>
-            <p class = "ml-2 m-1">Bob</p>
-        </div>
         </div>
     </div>
+</section>
+
+<div class="modal" id="rsvp">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <form method="post">
+            <header class="modal-card-head">
+                <p class="modal-card-title">RSVP</p>
+                <button class="delete" type="button" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                {% csrf_token %}
+                {{ form.as_p }}
+            </section>
+            <footer class="modal-card-foot">
+                <button type="submit" class="button is-success">RSVP</button>
+                <button type="button" class="button">Cancel</button>
+            </footer>
+            </section>
+        </form>
+    </div>
+</div>
+
+<div class="container is-fluid">
+    <div class="columns mt-3">
+        <div class="column is-two-thirds">
+            <h1 class="title m-2">{{event.name}}</h1>
+
+
+            <p class="m-2"> <i class="fas fa-user"></i> Brought to you by: {{event.host}}</p>
+
+            <p class="m-2"> <i class="fa-solid fa-map-location-dot"></i> {{event.location}}</p>
+
+            <p class="m-2"> <i class="fa-regular fa-clock"></i> {{event.date}} at {{event.time}}</p>
+
+            <p class="m-2"> {{event.description}}</p>
+            
+            <button class="button is-primary ml-3 m-2 js-modal-trigger" data-target="rsvp">RSVP!</button>
+        </div>
+
+        <div class="column">
+            <h1 class="title m-2">Attendees</h1>
+            {% for attendee in attendees%}
+            <p class="ml-2 m-1">{{attendee.name}}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% load static %}
+
 
 {% endblock %}

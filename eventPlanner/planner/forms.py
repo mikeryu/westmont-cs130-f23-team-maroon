@@ -1,5 +1,6 @@
 from django import forms
-from .models import Event
+from django.forms import ModelForm
+from .models import Event, RSVP
 
 class CreateEventForm2(forms.Form): 
     event_name = forms.CharField(label="Event name", max_length=100)
@@ -12,3 +13,8 @@ class CreateEventForm2(forms.Form):
     class Meta:
         model = Event
         exclude = ("user", )
+
+class RSVPForm(ModelForm):
+    class Meta: 
+        model = RSVP
+        exclude = ("event", )

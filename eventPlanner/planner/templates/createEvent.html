@@ -1,6 +1,3 @@
-
-
-
 {% extends "base.html" %}
 
 {% block content %}
@@ -83,7 +80,7 @@
         <div class="field">
             <label class="label">Description</label>
             <div class="control">
-                <textarea class="textarea" placeholder="Describe your event."></textarea>
+                <textarea class="textarea" placeholder="Describe your event." name="description"></textarea>
             </div>
         </div>
 
@@ -133,12 +130,8 @@
       </form>
       
     </div>
-    </div>
 
-  
+{% load static %}
 
-    {% load static %}
-   
 
-    {% endblock %}
-    
+{% endblock %}

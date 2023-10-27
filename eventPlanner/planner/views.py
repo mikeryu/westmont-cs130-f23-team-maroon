@@ -1,9 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
-from .models import Event
+from .models import Event, RSVP
 from django.http import Http404, HttpResponseRedirect
-from .forms import CreateEventForm2
+from .forms import CreateEventForm2, RSVPForm
 # from django.shortcuts import render
-
 
 # Create your views here.
 
@@ -22,10 +21,17 @@ def events(request):
 def event(request, id):
     try: 
         event = Event.objects.get(id=id)
+        attendees = RSVP.objects.filter(event=event).values()
+        form = RSVPForm(request.POST or None)
+        if request.method == "POST":
+            if form.is_valid():
+                rsvp = form.save(commit=False)
+                rsvp.event = event
+                rsvp.save()
+        context = {'event': event, 'form': form, 'attendees': attendees}
+    
     except Event.DoesNotExist:
         return redirect('events')
-    
-    context = {'event': event}
     
     return render(request, 'eventDetail.html', context)
 
@@ -39,7 +45,8 @@ def createEvent(request):
         location = request.POST["location"]
         date = request.POST["date"]
         time = request.POST["time"]
-        event = Event(name=name, host=host, location=location, date=date, time=time)
+        description = request.POST["description"]
+        event = Event(name=name, host=host, location=location, date=date, time=time, description=description)
         event.save()
         
         return redirect('events')
