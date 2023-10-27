@@ -16,7 +16,14 @@ class TestIsaac(unittest.TestCase):
 
         self.driver.get("http://127.0.0.1:8000/events")
         sleep(3)
-
+    
+    
+    
+    """
+    test for issue #36 - 
+    makes sure that clicking on an event card in the brower
+    takes the user to the correct event detail page
+    """
     def testLinktoEventDetail(self):
         events = self.driver.find_elements(By.CLASS_NAME, "event")
 
