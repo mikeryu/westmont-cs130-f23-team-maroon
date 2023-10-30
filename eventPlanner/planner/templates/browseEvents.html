@@ -17,7 +17,7 @@
   <div class="columns is-multiline">
     {% for event in events %}
     <div class="column is-one-third">
-      <a href = {% url "event" event.id%}> 
+      <a href={% url "event" event.id%}>
         <div class="box">
           <p class="title">{{event.name}}</p>
           <div class="tags">

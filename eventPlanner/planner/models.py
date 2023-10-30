@@ -31,3 +31,12 @@ class Task(models.Model):
     def __str__(self):
         return self.name
     
+# rsvp class
+# stores a singular RSVP for a given event
+class RSVP(models.Model):
+    name = models.CharField(max_length=50)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
