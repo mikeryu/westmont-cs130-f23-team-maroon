@@ -43,20 +43,14 @@
             <h1 class="title m-2">{{event.name}}</h1>
 
 
-            <p class="m-2"> <i class="fas fa-user"></i> Brought to you by: Event Host</p>
+            <p class="m-2"> <i class="fas fa-user"></i> Brought to you by: {{event.host}}</p>
 
             <p class="m-2"> <i class="fa-solid fa-map-location-dot"></i> {{event.location}}</p>
 
             <p class="m-2"> <i class="fa-regular fa-clock"></i> {{event.date}} at {{event.time}}</p>
 
-            <p class="m-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Eu lobortis elementum nibh tellus molestie nunc non
-                blandit. Sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium.
-                Eget egestas purus viverra accumsan in. Massa vitae tortor condimentum lacinia quis vel. Lectus
-                quam id leo in vitae turpis massa sed elementum. Eu feugiat pretium nibh ipsum consequat nisl
-                vel pretium. Non sodales neque sodales ut. Eget felis eget nunc lobortis mattis aliquam faucibus
-                purus. Pharetra massa massa ultricies mi quis.</p>
-
+            <p class="m-2"> {{event.description}}</p>
+            
             <button class="button is-primary ml-3 m-2 js-modal-trigger" data-target="rsvp">RSVP!</button>
         </div>
 

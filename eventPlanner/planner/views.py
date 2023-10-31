@@ -1,7 +1,8 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import Event, RSVP
-from django.http import Http404
-from .forms import RSVPForm
+from django.http import Http404, HttpResponseRedirect
+from .forms import CreateEventForm2, RSVPForm
+# from django.shortcuts import render
 
 # Create your views here.
 
@@ -34,6 +35,26 @@ def event(request, id):
     
     return render(request, 'eventDetail.html', context)
 
+#Create event page
 def createEvent(request):
-    return render(request, 'createEvent.html')
+    
+    #Check to see the request method. POST means the form was just submitted.
+    if request.method == "POST":
+        
+        #Using the POST data from the form to create an event
+        name = request.POST["name"]
+        host = request.POST["host"]
+        location = request.POST["location"]
+        date = request.POST["date"]
+        time = request.POST["time"]
+        description = request.POST["description"]
+        event = Event(name=name, host=host, location=location, date=date, time=time, description=description)
 
+        #Save the event to the database
+        event.save()
+        
+        #Send the user to the browse events page
+        return redirect('events')
+
+    #In the case of a GET request, just render the create event form
+    return render(request, 'createEvent.html')

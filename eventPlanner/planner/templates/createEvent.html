@@ -2,134 +2,134 @@
 
 {% block content %}
 
-<section class="hero is-primary">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        <i class="fa-solid fa-calendar-days"></i>
-        Create Event
-      </h1>
-      <h2 class="subtitle">
-        Plan something new!
-      </h2>
-    </div>
-  </div>
-</section>
-
-
-<div class="container is-fluid mt-4">
-  <div class="column is-two-thirds">
-    <form id="createEventForm" action="" method="post">
-      {% csrf_token %}
-      <div class="field">
-        <label class="label">Name</label>
-        <div class="control has-icons-left">
-          <input class="input is-rounded" type="text" placeholder="Event name">
-          <span class="icon is-small is-left">
-            <i class="fas fa-flag"></i>
-          </span>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+            <h1 class="title">
+              <i class="fa-solid fa-calendar-days"></i>
+              Create Event
+            </h1>
+            <h2 class="subtitle">
+                Plan something new!
+            </h2>
+            </div>
         </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Host</label>
-        <div class="control has-icons-left">
-          <input class="input is-rounded" type="text" placeholder="Enter your name">
-          <span class="icon is-small is-left">
-            <i class="fas fa-user"></i>
-          </span>
-        </div>
-      </div>
+    </section>
 
 
-
-
-
-      <div class="field">
-        <label class="label">Location</label>
-        <div class="control has-icons-left">
-          <input class="input is-rounded" type="text" placeholder="Location">
-          <span class="icon is-left">
-            <i class="fa-solid fa-map-location-dot"></i>
-          </span>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Date</label>
-        <div class="control has-icons-left">
-          <input class="input is-rounded" type="text" placeholder="Enter Date">
-          <span class="icon is-left">
-            <i class="fa-solid fa-calendar-days"></i>
-          </span>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Time</label>
-        <div class="control has-icons-left">
-          <input class="input is-rounded" type="text" placeholder="Enter Time">
-          <span class="icon is-left">
-            <i class="fa-solid fa-clock"></i>
-          </span>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Description</label>
-        <div class="control">
-          <textarea class="textarea" placeholder="Describe your event."></textarea>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Tasks</label>
-        <div class="control">
-          <div id="tasks" class='is-one-fifth'>
+    <div class="container is-fluid mt-4">
+      <div class = "column is-two-thirds"> 
+      <form id= "createEventForm" action = "{% url 'createEvent' %}" method= "post"> 
+        {% csrf_token %}
+        <div class="field">
+            <label class="label">Name</label>
+            <div class="control has-icons-left">
+              <input class="input is-rounded" type="text" placeholder="Event name" name="name">
+              <span class="icon is-small is-left">
+                <i class="fas fa-flag"></i>
+              </span>
           </div>
         </div>
-      </div>
 
-      <div class="modal" id="addTask">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">Add Tasks</p>
-            <button class="delete" aria-label="close"></button>
-          </header>
-          <section class="modal-card-body">
-            <h1 class="subtitle">Enter Task</h1>
-            <input id="taskInput" class="input is-primary" type="text" placeholder="Enter your task.">
-          </section>
-          <footer class="modal-card-foot">
-            <button id="addTaskButton" type="button" class="button is-success">Add</button>
-            <button type="button" class="button">Cancel</button>
-          </footer>
+        <div class="field">
+          <label class="label">Host</label>
+          <div class="control has-icons-left">
+            <input class="input is-rounded" type="text" placeholder="Enter your name" name="host">
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </div>
         </div>
-      </div>
+        
 
-      <div class="field is-grouped">
-        <div class="control">
-          <button class="button is-link js-modal-trigger" type="button" data-target="addTask">
-            <span class="mr-2">Add Tasks</span>
-            <i class="fa-solid fa-plus"></i>
-          </button>
+
+
+      
+        <div class="field">
+            <label class="label">Location</label>
+            <div class="control has-icons-left">
+                <input class="input is-rounded" type="text" placeholder="Location" name="location">
+                <span class = "icon is-left">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                </span>
+            </div>
         </div>
-      </div>
 
-      <div class="field is-grouped">
-        <div class="control">
-          <button class="button is-primary" type="submit">Create!</button>
+        <div class="field">
+            <label class="label">Date</label>
+            <div class="control has-icons-left">
+              <input class="input is-rounded" type="text" placeholder="Enter Date" name="date">
+              <span class = "icon is-left">
+                <i class="fa-solid fa-calendar-days"></i>
+              </span>
+            </div>
         </div>
-        <div class="control">
-          <button class="button is-light" type="button">Cancel</button>
+        
+        <div class="field">
+            <label class="label">Time</label>
+            <div class="control has-icons-left">
+              <input class="input is-rounded" type="text" placeholder="Enter Time" name="time">
+              <span class = "icon is-left">
+                <i class="fa-solid fa-clock"></i>
+              </span>
+            </div>
         </div>
-      </div>
-    </form>
-  </div>
-</div>
+        
+      
 
+        <div class="field">
+            <label class="label">Description</label>
+            <div class="control">
+                <textarea class="textarea" placeholder="Describe your event." name="description"></textarea>
+            </div>
+        </div>
 
+        <div class="field"> 
+          <label class="label">Tasks</label>
+          <div class="control">
+            <div  id = "tasks" class = 'is-one-fifth'>
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal" id = "addTask">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Add Tasks</p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <h1 class = "subtitle">Enter Task</h1>
+              <input id = "taskInput" class="input is-primary" type="text" placeholder="Enter your task.">
+            </section>
+            <footer class="modal-card-foot">
+              <button id = "addTaskButton" type = "button" class="button is-success">Add</button>
+              <button type = "button" class="button">Cancel</button>
+            </footer>
+          </div>
+        </div>
+
+        <div class = "field is-grouped">
+            <div class="control">
+                <button class="button is-link js-modal-trigger" type="button" data-target="addTask">
+                  <span class = "mr-2">Add Tasks</span>
+                  <i class="fa-solid fa-plus"></i> 
+                </button>
+            </div>
+        </div>
+        
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-primary" type="submit">Create!</button>
+            </div>
+            <div class="control">
+                <button class="button is-light" type = "button">Cancel</button>
+            </div>
+        </div>
+      </form>
+      
+    </div>
 
 {% load static %}
 
