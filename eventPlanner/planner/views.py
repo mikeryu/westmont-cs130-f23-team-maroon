@@ -1,11 +1,11 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
-from .models import Event, RSVP
+from .models import Event, RSVP, Task
 from django.http import Http404, HttpResponseRedirect
 from .forms import CreateEventForm2, RSVPForm
+
 # from django.shortcuts import render
 
 # Create your views here.
-
 #home page view for the event planner
 def home(request):
     return render(request, 'home.html')
@@ -48,10 +48,20 @@ def createEvent(request):
         date = request.POST["date"]
         time = request.POST["time"]
         description = request.POST["description"]
-        event = Event(name=name, host=host, location=location, date=date, time=time, description=description)
 
+        #Get the list of tasks from the form
+        tasks = request.POST.getlist("task-item")
+
+        #create the event
+        event = Event(name=name, host=host, location=location, date=date, time=time, description=description)
         #Save the event to the database
         event.save()
+
+        #link all tasks to the event and save them
+        for task in tasks:
+            newtask = Task(name=task, event=event)
+            newtask.save()
+ 
         
         #Send the user to the browse events page
         return redirect('events')
