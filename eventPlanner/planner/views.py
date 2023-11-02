@@ -71,3 +71,10 @@ def createEvent(request):
 
     #In the case of a GET request, just render the create event form
     return render(request, 'createEvent.html')
+
+
+def login(request):
+    return render(request, 'login.html')
+
+def signup(request):
+    return render(request, 'signUp.html')
