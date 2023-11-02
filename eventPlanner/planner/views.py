@@ -29,8 +29,10 @@ def event(request, id):
                 rsvp.event = event
                 rsvp.save()
 
+        # filters the tasks and saves only the ones for this event 
         tasks = Task.objects.filter(event = event).values()
 
+        # tasks passed into the context of the event 
         context = {'event': event, 'form': form, 'attendees': attendees, 'tasks': tasks}
     
     except Event.DoesNotExist:
