@@ -28,7 +28,10 @@ def event(request, id):
                 rsvp = form.save(commit=False)
                 rsvp.event = event
                 rsvp.save()
-        context = {'event': event, 'form': form, 'attendees': attendees}
+
+        tasks = Task.objects.filter(event = event).values()
+
+        context = {'event': event, 'form': form, 'attendees': attendees, 'tasks': tasks}
     
     except Event.DoesNotExist:
         return redirect('events')
