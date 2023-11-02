@@ -30,7 +30,6 @@ def event(request, id):
                 rsvp.save()
 
         tasks = Task.objects.filter(event = event).values()
-        print(tasks)
 
         context = {'event': event, 'form': form, 'attendees': attendees, 'tasks': tasks}
     
