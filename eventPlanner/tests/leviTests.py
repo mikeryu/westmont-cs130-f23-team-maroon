@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 import unittest
 from time import sleep
 
-class BrycynTest(unittest.TestCase):
+class LeviTest(unittest.TestCase):
     def setUp(self):
         options = Options()
         options.add_argument("--headless=new")
