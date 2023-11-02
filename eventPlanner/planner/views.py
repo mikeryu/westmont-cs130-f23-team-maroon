@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
-from .models import Event, RSVP
+from .models import Event, RSVP, Task
 from django.http import Http404, HttpResponseRedirect
 from .forms import CreateEventForm2, RSVPForm
 # from django.shortcuts import render
@@ -28,7 +28,11 @@ def event(request, id):
                 rsvp = form.save(commit=False)
                 rsvp.event = event
                 rsvp.save()
-        context = {'event': event, 'form': form, 'attendees': attendees}
+
+        tasks = Task.objects.filter(event = event).values()
+        print(tasks)
+
+        context = {'event': event, 'form': form, 'attendees': attendees, 'tasks': tasks}
     
     except Event.DoesNotExist:
         return redirect('events')
