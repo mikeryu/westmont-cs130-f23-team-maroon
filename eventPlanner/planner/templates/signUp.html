@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container has-text-centered">
+       {% load static %}
+       <img src={% static "logo.png" %}>
+    </div>
+
+<form>
+    <div class="container is-flex is-justify-content-center is-align-items-center" id="loginContainer">
+        <div class="column is-centered is-6">
+            <div class="column">
+      <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input class="input" type="email" placeholder="Email">
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <p class="control has-icons-left">
+            <input class="input" type="password" placeholder="Password">
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
+ 
+
+      <div class="container has-text-centered">
+        <div class="field">
+            <p class="control">
+            <button class="button is-primary">
+                Sign Up!
+            </button>
+            </p>
+        </div>
+        <div class="column">
+            <p><a hfref ="#">Forgot Password?</a></p>
+            <p><a hfref ="#">Already have an account?</a></p>
+        </div>
+
+      </div>
+
+      </div>
+    </div>
+    </div>
+  </div>
+</form>
+{% endblock %}
