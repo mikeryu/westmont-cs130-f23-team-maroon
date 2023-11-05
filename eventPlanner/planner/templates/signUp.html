@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 
+
 {% block class %}
 class = "background"
 {% endblock class %}
@@ -14,6 +15,7 @@ class = "background"
        <img src={% static "logo.png" %}>
     </div>
 
+
 <form method = "post">
   {% csrf_token %}
     <div class="container is-flex is-justify-content-center is-align-items-center" id="loginContainer">
@@ -25,6 +27,7 @@ class = "background"
       <div class="field">
           <p class="control has-icons-left has-icons-right">
             <input class="input" type="email" placeholder="Email" name="email">
+
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
@@ -35,7 +38,9 @@ class = "background"
 
         <div class="field">
           <p class="control has-icons-left">
+
             <input class="input" type="password" placeholder="Password" name="password">
+
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -46,14 +51,18 @@ class = "background"
       <div class="container has-text-centered">
         <div class="field">
             <p class="control">
+
             <button class="button is-primary"> 
+
                 Sign Up!
             </button>
             </p>
         </div>
         <div class="column">
+
             <p><a href ="#">Forgot Password?</a></p>
             <p><a href ="#">Already have an account?</a></p>
+
         </div>
 
       </div>

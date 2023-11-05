@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 
 
+
 {% block class %}
 class = "background"
 {% endblock class %}
 
 
-{% block content %}
 
     <div class="container has-text-centered">
        {% load static %}
        <img src={% static "logo.png" %}>
     </div>
+
 
 <form method="post">
     {% csrf_token %}
@@ -24,6 +25,7 @@ class = "background"
     <div class="field">
         <p class="control has-icons-left has-icons-right">
           <input class="input" type="email" placeholder="Email" name = "email">
+
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>
@@ -31,15 +33,17 @@ class = "background"
           </span>
         </p>
       </div>
+
       <div class="field">
         <p class="control has-icons-left">
           <input class="input" type="password" placeholder="Password" name = "password">
+
           <span class="icon is-small is-left">
             <i class="fas fa-lock"></i>
           </span>
         </p>
       </div>
-  
+
 
       <div class="container has-text-centered">
         <div class="field">
