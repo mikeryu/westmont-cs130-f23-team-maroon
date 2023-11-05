@@ -1,36 +1,66 @@
-from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect
 from .models import Event, RSVP, Task
-from django.http import Http404, HttpResponseRedirect
-from .forms import CreateEventForm2, RSVPForm
+from .forms import RSVPForm
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
-# from django.shortcuts import render
 
-# Create your views here.
-#home page view for the event planner
+
+"""
+Once the user has been logged in, there may be pages we do not want them to access.
+If they do try to access those pages, we want to redirect them to a different page.
+That page is defined here.
+"""
+default_logged_in_redirect = 'events'
+
+
+"""
+home page view for the event planner
+"""
 def home(request):
+    #if the user is already logged in, redirect them to the events page
+    if request.user.is_authenticated:
+        return redirect(default_logged_in_redirect)
+    
     return render(request, 'home.html')
 
-#browse events view
+
+
+"""
+browse events view
+here user should be able to see a list of events
+"""
+@login_required
 def events(request):
     events = Event.objects.all()
     context = {'events': events}
-
     return render(request, 'browseEvents.html', context)
 
-#event detail view: viewing a specific event
+
+
+"""
+event detail view
+here the user should be able to see the details of an event
+
+if the user has submitted the RSVP form, save the RSVP to the database
+"""
+@login_required
 def event(request, id):
     try: 
         event = Event.objects.get(id=id)
         attendees = RSVP.objects.filter(event=event).values()
         form = RSVPForm(request.POST or None)
+        #if the user has submitted the RSVP form, save the RSVP to the database
         if request.method == "POST":
             if form.is_valid():
                 rsvp = form.save(commit=False)
                 rsvp.event = event
                 rsvp.save()
 
+        #otherwise, just render the event detail page with the event, form, tasks, and attendees
         tasks = Task.objects.filter(event = event).values()
-
         context = {'event': event, 'form': form, 'attendees': attendees, 'tasks': tasks}
     
     except Event.DoesNotExist:
@@ -38,9 +68,18 @@ def event(request, id):
     
     return render(request, 'eventDetail.html', context)
 
-#Create event page
+
+
+
+
+"""
+Create event page
+here the user should be able to create an event on this page
+
+tasks that are created on this page will also be parsed and created, then linked to the event after the event is created
+"""
+@login_required
 def createEvent(request):
-    
     #Check to see the request method. POST means the form was just submitted.
     if request.method == "POST":
         
@@ -73,8 +112,67 @@ def createEvent(request):
     return render(request, 'createEvent.html')
 
 
-def login(request):
+
+
+"""
+login page, here the user should be able to login
+logs in the user and redirects them to the events page
+if the user does not provide the correct login credientials, 
+they will be redirected back to the login page with an error message saying that the login credientials were invalid
+"""
+def userLogin(request):
+    #if the user is already logged in, redirect them to the events page
+    if request.user.is_authenticated:
+        return redirect(default_logged_in_redirect)
+
+    #if the user has submitted the login form, authenticate them and log them in
+    if request.method == 'POST':
+        
+        username = request.POST['email']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+        #if the user is authenticated, log them in and redirect them to the events page
+        if user is not None:
+             login(request, user)
+             return redirect(default_logged_in_redirect)
+        #otherwise, render the login page with an error message
+        else:
+            return render(request, 'login.html', context = {'error_message': 'Invalid login credientials'})
+
     return render(request, 'login.html')
 
+
+
+
+
+"""
+signup page, 
+here the user should be able to signup and create a new account
+for now, we are just using the email as the username, but this can be easily changed later
+if the user already exists, they will be redirected back to the signup page with an error message
+saying that that email already exists
+"""
 def signup(request):
+    #if the user is already logged in, redirect them to the events page
+    if request.user.is_authenticated:
+        return redirect(default_logged_in_redirect)
+    
+    if request.method == 'POST':
+        username = request.POST['email']
+        password = request.POST['password']
+
+        #check to see if the user already exists
+        if User.objects.filter(username=username).exists():
+            return render(request, 'signUp.html', {'error_message': 'Email already exists'})
+        else:
+            #if the user doesn't already exist, we go ahead and crreate the user, then log them in
+            user = User.objects.create_user(username=username, email=username, password=password)
+            user.save()
+    
+            login(request, user)
+
+            return redirect(default_logged_in_redirect)
+        
+
     return render(request, 'signUp.html')

@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+
+{% block class %}
+class = "background"
+{% endblock class %}
+
+
 {% block content %}
 
     <div class="container has-text-centered">
@@ -7,13 +13,17 @@
        <img src={% static "logo.png" %}>
     </div>
 
-<form>
+<form method="post">
+    {% csrf_token %}
     <div class="container is-flex is-justify-content-center is-align-items-center" id="loginContainer">
         <div class="column is-centered is-6">
             <div class="column">
+              {% if error_message %}
+                <p>{{ error_message }}</p>
+              {% endif %}
     <div class="field">
         <p class="control has-icons-left has-icons-right">
-          <input class="input" type="email" placeholder="Email">
+          <input class="input" type="email" placeholder="Email" name = "email">
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>
@@ -21,16 +31,15 @@
           </span>
         </p>
       </div>
-      <br>
       <div class="field">
         <p class="control has-icons-left">
-          <input class="input" type="password" placeholder="Password">
+          <input class="input" type="password" placeholder="Password" name = "password">
           <span class="icon is-small is-left">
             <i class="fas fa-lock"></i>
           </span>
         </p>
       </div>
-      <br>
+  
 
       <div class="container has-text-centered">
         <div class="field">
