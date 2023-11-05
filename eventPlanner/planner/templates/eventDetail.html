@@ -50,6 +50,11 @@
             <p class="m-2"> <i class="fa-regular fa-clock"></i> {{event.date}} at {{event.time}}</p>
 
             <p class="m-2"> {{event.description}}</p>
+
+            <h1 class="title m-2">Tasks availible</h1>
+            {% for task in tasks%}
+            <p class="ml-2 m-1">{{task.name}}</p>
+            {% endfor %}
             
             <button class="button is-primary ml-3 m-2 js-modal-trigger" data-target="rsvp">RSVP!</button>
         </div>
