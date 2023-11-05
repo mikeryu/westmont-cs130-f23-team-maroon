@@ -59,8 +59,10 @@ def event(request, id):
                 rsvp.event = event
                 rsvp.save()
 
+
         #otherwise, just render the event detail page with the event, form, tasks, and attendees
         tasks = Task.objects.filter(event = event).values()
+
         context = {'event': event, 'form': form, 'attendees': attendees, 'tasks': tasks}
     
     except Event.DoesNotExist:
@@ -110,6 +112,7 @@ def createEvent(request):
 
     #In the case of a GET request, just render the create event form
     return render(request, 'createEvent.html')
+
 
 
 
@@ -175,4 +178,4 @@ def signup(request):
             return redirect(default_logged_in_redirect)
         
 
-    return render(request, 'signUp.html')
+
