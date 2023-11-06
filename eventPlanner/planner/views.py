@@ -177,5 +177,7 @@ def signup(request):
 
             return redirect(default_logged_in_redirect)
         
+    return render(request, 'signUp.html')
+        
 
 
