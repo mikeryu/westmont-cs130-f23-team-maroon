@@ -28,7 +28,12 @@ def event(request, id):
                 rsvp = form.save(commit=False)
                 rsvp.event = event
                 rsvp.save()
-        context = {'event': event, 'form': form, 'attendees': attendees}
+
+        # filters the tasks and saves only the ones for this event 
+        tasks = Task.objects.filter(event = event).values()
+
+        # tasks passed into the context of the event 
+        context = {'event': event, 'form': form, 'attendees': attendees, 'tasks': tasks}
     
     except Event.DoesNotExist:
         return redirect('events')
@@ -68,3 +73,10 @@ def createEvent(request):
 
     #In the case of a GET request, just render the create event form
     return render(request, 'createEvent.html')
+
+
+def login(request):
+    return render(request, 'login.html')
+
+def signup(request):
+    return render(request, 'signUp.html')
