@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "loggedInbase.html" %}
 
 {%block content %}
 
@@ -50,6 +50,17 @@
             <p class="m-2"> <i class="fa-regular fa-clock"></i> {{event.date}} at {{event.time}}</p>
 
             <p class="m-2"> {{event.description}}</p>
+            
+            <div class="title m-2">Sign up for a task!
+            <div class="control">
+                <div  id = "tasks" class="is-one-fifth">
+                    {% for task in tasks%}
+                    <button class="button is-secondary ml-3 m-2 js-modal-trigger" data-target="task">{{task.name}}</button>
+                    {% endfor %}
+                </div>
+              </div>
+            </div>
+
             
             <button class="button is-primary ml-3 m-2 js-modal-trigger" data-target="rsvp">RSVP!</button>
         </div>

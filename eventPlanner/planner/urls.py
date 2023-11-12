@@ -10,6 +10,8 @@ urlpatterns = [
 
     path('createEvent', views.createEvent, name = 'createEvent'),
 
-    path('login', views.login, name = 'login'),
+
+    path('login', views.userLogin, name = 'loginPage'),
+
     path('signup', views.signup, name = 'signUp'),
 ]
