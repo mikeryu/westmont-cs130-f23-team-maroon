@@ -26,7 +26,30 @@
             </header>
             <section class="modal-card-body">
                 {% csrf_token %}
-                {{ form.as_p }}
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="Name">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Select an option:</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name = "selectedTask">
+                                    <option value = "-1">I don't want to help out.</option>
+                                {% for task in tasks%}
+                                    <option value = "{{task.id}}">{{task.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                
+                
+            
             </section>
             <footer class="modal-card-foot">
                 <button type="submit" class="button is-success">RSVP</button>
@@ -68,7 +91,7 @@
         <div class="column">
             <h1 class="title m-2">Attendees</h1>
             {% for attendee in attendees%}
-            <p class="ml-2 m-1">{{attendee.name}}</p>
+            <p class="ml-2 m-1">{{attendee.name}} will: {{attendee.task}}</p>
             {% endfor %}
         </div>
     </div>

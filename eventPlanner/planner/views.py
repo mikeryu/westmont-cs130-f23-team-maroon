@@ -48,28 +48,43 @@ if the user has submitted the RSVP form, save the RSVP to the database
 """
 @login_required
 def event(request, id):
-    try: 
-        event = Event.objects.get(id=id)
-        attendees = RSVP.objects.filter(event=event).values()
-        form = RSVPForm(request.POST or None)
-        #if the user has submitted the RSVP form, save the RSVP to the database
-        if request.method == "POST":
-            if form.is_valid():
-                rsvp = form.save(commit=False)
-                rsvp.event = event
-                rsvp.save()
-                return redirect('event', id=id)
 
+    if request.method == "POST":
+        name = request.POST["name"]
+        #grab the task id from the form
+        taskId = request.POST.get('selectedTask')
+
+        try:
+            task = Task.objects.get(id=taskId)
+        except Task.DoesNotExist:
+            #if the tasks doesn't exist, we just assume the user is doing nothing for the event
+            task = Task(name = "do nothing", event  = Event.objects.get(id=id), completed = True)
+        task.completed = True
+        task.save()
+
+        #create the RSVP and save it to the database
+        rsvp = RSVP(name=name, event=task.event, task=task)
+        rsvp.save()
+
+        return redirect('event', id=id)
+
+    else: #if the request method is GET, just render the event detail page normally
+        try: 
+            event = Event.objects.get(id=id)
+        except Event.DoesNotExist:
+            return redirect('events')
+        
+        attendees = RSVP.objects.filter(event=event)
+    
 
         #otherwise, just render the event detail page with the event, form, tasks, and attendees
-        tasks = Task.objects.filter(event = event).values()
+        tasks = Task.objects.filter(event = event, completed = False).values()
 
-        context = {'event': event, 'form': form, 'attendees': attendees, 'tasks': tasks}
-    
-    except Event.DoesNotExist:
-        return redirect('events')
-    
-    return render(request, 'eventDetail.html', context)
+        context = {'event': event, 'attendees': attendees, 'tasks': tasks, }
+        
+       
+        
+        return render(request, 'eventDetail.html', context)
 
 
 
@@ -111,8 +126,9 @@ def createEvent(request):
         #Send the user to the browse events page
         return redirect('events')
 
-    #In the case of a GET request, just render the create event form
-    return render(request, 'createEvent.html')
+    else:
+        #In the case of a GET request, just render the create event form
+        return render(request, 'createEvent.html')
 
 
 
