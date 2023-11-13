@@ -27,7 +27,7 @@ class Event(models.Model):
 #describes a task for a specific event
 class Task(models.Model):
     name = models.CharField(max_length=250)
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.name
@@ -36,7 +36,7 @@ class Task(models.Model):
 # stores a singular RSVP for a given event
 class RSVP(models.Model):
     name = models.CharField(max_length=50)
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.name
