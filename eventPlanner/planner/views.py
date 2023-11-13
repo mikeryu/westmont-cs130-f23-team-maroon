@@ -58,6 +58,7 @@ def event(request, id):
                 rsvp = form.save(commit=False)
                 rsvp.event = event
                 rsvp.save()
+                return redirect('event', id=id)
 
 
         #otherwise, just render the event detail page with the event, form, tasks, and attendees
