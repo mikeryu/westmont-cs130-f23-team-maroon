@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='rsvp',
             name='task',
-            field=models.ForeignKey(default='none', on_delete=django.db.models.deletion.CASCADE, to='planner.task'),
+            field=models.ForeignKey(default='1', on_delete=django.db.models.deletion.CASCADE, to='planner.task'),
         ),
     ]
