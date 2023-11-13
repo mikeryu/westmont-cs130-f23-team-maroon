@@ -70,7 +70,7 @@
       <div class="field">
         <label class="label">Time</label>
         <div class="control has-icons-left">
-          <input class="input is-rounded" type="text" placeholder="Enter Time" name="time" maxlength="100">
+          <input id="time" class="input is-rounded" type="text" placeholder="Enter Time" name="time" maxlength="100">
           <span class="icon is-left">
             <i class="fa-solid fa-clock"></i>
           </span>
@@ -115,8 +115,8 @@
 
       <div class="field is-grouped">
         <div class="control">
-          <button class="button is-link js-modal-trigger" type="button" data-target="addTask">
-            <span class="mr-2">Add Tasks</span>
+          <button id="addTaskBttn" class="button is-link js-modal-trigger" type="button" data-target="addTask">
+            <span id="addTask" class="mr-2">Add Tasks</span>
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>
@@ -124,7 +124,7 @@
 
       <div class="field is-grouped">
         <div class="control">
-          <button class="button is-primary" type="submit">Create!</button>
+          <button id="submit" class="button is-primary" type="submit">Create!</button>
         </div>
         <div class="control">
           <button class="button is-light" type="button">Cancel</button>
