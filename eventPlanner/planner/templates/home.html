@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% block class %}
@@ -7,18 +6,15 @@ class = "background"
 
 
 {%block content %}
-  
-  <div class="container m-5" id = "homePage">
-    <h1 id="homePageText" class="title ml-4"><span class = "has-text-primary">Eventful.</span> A place where you can take control of your events.</h1>
-    <h1 class = "title ml-4">Checkout upcoming events now!</h1>
-    <div class = "ml-4">
-      <a href = {% url "events" %} class="button is-primary "> View Events</a>
-      <a href = "{% url "createEvent" %}" class = "button is-outlined is-primary">Create Events</a>
-    </div> 
-  </div>
 
-  
+<div class="container m-5" id="homePage">
+  <h1 id="homePageText" class="title ml-4"><span class="has-text-primary">Eventful.</span> A place where you can take
+    control of your events.</h1>
+  <h1 class="title ml-4">Checkout upcoming events now!</h1>
+  <div class="ml-4">
+    <a id="events" href="{% url 'events' %}" class="button is-primary "> View Events</a>
+    <a id="createevent" href="{% url 'createEvent' %}" class="button is-outlined is-primary">Create Events</a>
+  </div>
+</div>
 
 {% endblock %}
-
-
