@@ -74,6 +74,7 @@
 
             <p class="m-2"> {{event.description}}</p>
             <br>
+            {% if tasks|length != 0 %}
             <div class="title m-2">Sign up for a task!
                 <div class="control">
                     <div id="tasks" class="is-one-fifth">
@@ -84,6 +85,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
 
 
             <button class="rsvp-button button is-primary ml-3 m-2 js-modal-trigger" data-target="rsvp">RSVP!</button>
