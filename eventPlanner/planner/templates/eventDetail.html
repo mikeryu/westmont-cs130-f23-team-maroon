@@ -1,4 +1,4 @@
-{% extends "loggedInbase.html" %}
+{% extends "loggedInBase.html" %}
 
 {%block content %}
 
@@ -40,7 +40,7 @@
 <div class="container is-fluid">
     <div class="columns mt-3">
         <div class="column is-two-thirds">
-            <h1 class="title m-2" id = "title">{{event.name}}</h1>
+            <h1 class="title m-2" id="title">{{event.name}}</h1>
 
 
             <p class="m-2"> <i class="fas fa-user"></i> Brought to you by: {{event.host}}</p>
@@ -50,25 +50,26 @@
             <p class="m-2"> <i class="fa-regular fa-clock"></i> {{event.date}} at {{event.time}}</p>
 
             <p class="m-2"> {{event.description}}</p>
-            
+
             <div class="title m-2">Sign up for a task!
-            <div class="control">
-                <div  id = "tasks" class="is-one-fifth">
-                    {% for task in tasks%}
-                    <button class="button is-secondary ml-3 m-2 js-modal-trigger" data-target="task">{{task.name}}</button>
-                    {% endfor %}
+                <div class="control">
+                    <div id="tasks" class="is-one-fifth">
+                        {% for task in tasks%}
+                        <button class="button is-secondary ml-3 m-2 js-modal-trigger"
+                            data-target="task">{{task.name}}</button>
+                        {% endfor %}
+                    </div>
                 </div>
-              </div>
             </div>
 
-            
-            <button class="button is-primary ml-3 m-2 js-modal-trigger" data-target="rsvp">RSVP!</button>
+
+            <button class="rsvp-button button is-primary ml-3 m-2 js-modal-trigger" data-target="rsvp">RSVP!</button>
         </div>
 
         <div class="column">
             <h1 class="title m-2">Attendees</h1>
             {% for attendee in attendees%}
-            <p class="ml-2 m-1">{{attendee.name}}</p>
+            <p class="attendee ml-2 m-1">{{attendee.name}}</p>
             {% endfor %}
         </div>
     </div>
