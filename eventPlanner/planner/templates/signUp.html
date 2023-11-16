@@ -24,13 +24,34 @@ class = "background"
         {% if error_message %}
         <p>{{ error_message }}</p>
         {% endif %}
-
+        <!-- First Name field -->
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input id="first" class="input" type="text" placeholder="First Name" name="first" maxlength="256">
+            <span class="icon is-small is-left">
+              <i class="fa fa-hand-lizard-o"></i>
+            </span>
+            <span class="icon is-small is-right">
+            </span>
+          </p>
+        </div>
+        <!-- Last Name field -->
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input id="last" class="input" type="text" placeholder="Last Name" name="last" maxlength="256">
+            <span class="icon is-small is-left">
+              <i class="fa fa-hand-lizard-o"></i>
+            </span>
+            <span class="icon is-small is-right">
+            </span>
+          </p>
+        </div>
         <!-- Username field -->
         <div class="field">
           <p class="control has-icons-left has-icons-right">
             <input id="username" class="input" type="username" placeholder="Username" name="username" maxlength="256">
             <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
+              <i class="fas fa-user"></i>
             </span>
             <span class="icon is-small is-right">
             </span>

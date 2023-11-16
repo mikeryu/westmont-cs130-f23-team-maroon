@@ -129,7 +129,10 @@ def createEvent(request):
 @login_required
 def manageAccount(request):
     if request.method == "POST":
-        newUsername = request.POST['newUsername']
+        newUsername = request.POST['username']
+        if User.objects.filter(username=newUsername).exists():
+            return render(request, 'manageAccount.html', {'error_message': 'Username is already taken'})
+        
         currUser = request.user
         currUser.username = newUsername
         currUser.save()
@@ -178,6 +181,9 @@ def signup(request):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
+        first = request.POST['first']
+        last = request.POST['last']
+
 
         # check to make sure the passwords match
         if password != request.POST['password_again']:
@@ -185,10 +191,10 @@ def signup(request):
 
         # check to see if the user already exists
         if User.objects.filter(username=username).exists():
-            return render(request, 'signUp.html', {'error_message': 'Email already exists'})
+            return render(request, 'signUp.html', {'error_message': 'Username already exists'})
         else:
             # if the user doesn't already exist, we go ahead and crreate the user, then log them in
-            user = User.objects.create_user(username=username, email=email, password=password)
+            user = User.objects.create_user(username=username, email=email, password=password, first_name=first, last_name=last)
             user.save()
     
             login(request, user)
