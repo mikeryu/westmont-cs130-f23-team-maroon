@@ -39,7 +39,6 @@ def events(request):
     return render(request, 'browseEvents.html', context)
 
 
-
 """
 event detail view
 here the user should be able to see the details of an event
@@ -75,14 +74,11 @@ def event(request, id):
             return redirect('events')
         
         attendees = RSVP.objects.filter(event=event)
-    
 
         #otherwise, just render the event detail page with the event, form, tasks, and attendees
         tasks = Task.objects.filter(event = event, completed = False).values()
 
         context = {'event': event, 'attendees': attendees, 'tasks': tasks, }
-        
-       
         
         return render(request, 'eventDetail.html', context)
 
@@ -130,9 +126,14 @@ def createEvent(request):
         #In the case of a GET request, just render the create event form
         return render(request, 'createEvent.html')
 
-
-
-
+@login_required
+def manageAccount(request):
+    if request.method == "POST":
+        newUsername = request.POST['newUsername']
+        currUser = request.user
+        currUser.username = newUsername
+        currUser.save()
+    return(render(request, 'manageAccount.html'))
 
 """
 login page, here the user should be able to login
@@ -147,23 +148,18 @@ def userLogin(request):
 
     #if the user has submitted the login form, authenticate them and log them in
     if request.method == 'POST':
-        
-        username = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
 
         user = authenticate(username=username, password=password)
-        #if the user is authenticated, log them in and redirect them to the events page
+        # if the user is authenticated, log them in and redirect them to the events page
         if user is not None:
              login(request, user)
              return redirect(default_logged_in_redirect)
-        #otherwise, render the login page with an error message
-        else:
+        else: # otherwise, render the login page with an error message
             return render(request, 'login.html', context = {'error_message': 'Invalid login credientials'})
 
     return render(request, 'login.html')
-
-
-
 
 
 """
@@ -179,15 +175,20 @@ def signup(request):
         return redirect(default_logged_in_redirect)
     
     if request.method == 'POST':
-        username = request.POST['email']
+        username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
 
-        #check to see if the user already exists
+        # check to make sure the passwords match
+        if password != request.POST['password_again']:
+            return render(request, 'signUp.html', {'error_message': 'Passwords do not match'})
+
+        # check to see if the user already exists
         if User.objects.filter(username=username).exists():
             return render(request, 'signUp.html', {'error_message': 'Email already exists'})
         else:
-            #if the user doesn't already exist, we go ahead and crreate the user, then log them in
-            user = User.objects.create_user(username=username, email=username, password=password)
+            # if the user doesn't already exist, we go ahead and crreate the user, then log them in
+            user = User.objects.create_user(username=username, email=email, password=password)
             user.save()
     
             login(request, user)

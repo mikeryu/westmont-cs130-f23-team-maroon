@@ -24,6 +24,19 @@ class = "background"
         {% if error_message %}
         <p>{{ error_message }}</p>
         {% endif %}
+
+        <!-- Username field -->
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input id="username" class="input" type="username" placeholder="Username" name="username" maxlength="256">
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+            </span>
+          </p>
+        </div>
+
         <div class="field">
           <p class="control has-icons-left has-icons-right">
             <input id="email" class="input" type="email" placeholder="Email" name="email" maxlength="256">
@@ -47,6 +60,17 @@ class = "background"
           </p>
         </div>
 
+        <div class="field">
+          <p class="control has-icons-left">
+
+            <input id="password_again" class="input" type="password" placeholder="Password" name="password_again"
+              maxlength="256">
+
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
 
         <div class="container has-text-centered">
           <div class="field">
