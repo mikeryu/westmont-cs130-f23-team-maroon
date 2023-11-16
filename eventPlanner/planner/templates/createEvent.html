@@ -24,7 +24,7 @@
       <div class="field">
         <label class="label">Name</label>
         <div class="control has-icons-left">
-          <input id="title" class="input is-rounded" type="text" placeholder="Event name" name="name" maxlength="250">
+          <input id="title" class="input is-rounded" type="text" placeholder="Event name" name="name" maxlength="250" required=True>
           <span class="icon is-small is-left">
             <i class="fas fa-flag"></i>
           </span>
@@ -34,8 +34,8 @@
       <div class="field">
         <label class="label">Host</label>
         <div class="control has-icons-left">
-          <input id="host" class="input is-rounded" type="text" placeholder="Enter your name" name="host"
-            maxlength="100">
+          <input id="host" class="input is-rounded" type="text" placeholder="Enter your name" name="host" 
+            maxlength="100" required=True>
           <span class="icon is-small is-left">
             <i class="fas fa-user"></i>
           </span>
@@ -50,7 +50,7 @@
         <label class="label">Location</label>
         <div class="control has-icons-left">
           <input id="location" class="input is-rounded" type="text" placeholder="Location" name="location"
-            maxlength="100">
+            maxlength="100" required=True>
           <span class="icon is-left">
             <i class="fa-solid fa-map-location-dot"></i>
           </span>
@@ -60,7 +60,7 @@
       <div class="field">
         <label class="label">Date</label>
         <div class="control has-icons-left">
-          <input class="input is-rounded" type="text" placeholder="Enter Date" name="date" maxlength="100">
+          <input class="input is-rounded" type="text" placeholder="Enter Date" name="date" maxlength="100" required=True>
           <span class="icon is-left">
             <i class="fa-solid fa-calendar-days"></i>
           </span>
@@ -70,7 +70,7 @@
       <div class="field">
         <label class="label">Time</label>
         <div class="control has-icons-left">
-          <input id="time" class="input is-rounded" type="text" placeholder="Enter Time" name="time" maxlength="100">
+          <input id="time" class="input is-rounded" type="text" placeholder="Enter Time" name="time" maxlength="100" required=True>
           <span class="icon is-left">
             <i class="fa-solid fa-clock"></i>
           </span>
@@ -83,7 +83,7 @@
         <label class="label">Description</label>
         <div class="control">
           <textarea id="description" class="textarea" placeholder="Describe your event." name="description"
-            maxlength="1000"></textarea>
+            maxlength="1000" required=True></textarea>
         </div>
       </div>
 

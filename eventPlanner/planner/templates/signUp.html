@@ -60,7 +60,7 @@ class = "background"
 
         <div class="field">
           <p class="control has-icons-left has-icons-right">
-            <input id="email" class="input" type="email" placeholder="Email" name="email" maxlength="256">
+            <input id="email" class="input is-rounded" type="email" placeholder="Email" name="email" maxlength="256">
 
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
@@ -73,7 +73,7 @@ class = "background"
         <div class="field">
           <p class="control has-icons-left">
 
-            <input id="password" class="input" type="password" placeholder="Password" name="password" maxlength="256">
+            <input id="password" class="input is-rounded" type="password" placeholder="Password" name="password" maxlength="256">
 
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
@@ -104,10 +104,7 @@ class = "background"
             </p>
           </div>
           <div class="column">
-
-            <p><a href="#">Forgot Password?</a></p>
-            <p><a href="#">Already have an account?</a></p>
-
+            <p><a href="{% url "loginPage" %}">Already have an account?</a></p>
           </div>
 
         </div>

@@ -115,8 +115,9 @@ def createEvent(request):
 
         #link all tasks to the event and save them
         for task in tasks:
-            newtask = Task(name=task, event=event)
-            newtask.save()
+            if len(task) > 0:
+                newtask = Task(name=task, event=event)
+                newtask.save()
  
         
         #Send the user to the browse events page

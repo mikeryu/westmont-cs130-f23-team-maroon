@@ -11,7 +11,7 @@ class = "background"
 {% block content %}
 <div class="container has-text-centered">
   {% load static %}
-  <img src={% static "logo.png" %}>
+  <img src={% static 'logo.png' %}>
 </div>
 
 
@@ -37,7 +37,7 @@ class = "background"
 
         <div class="field">
           <p class="control has-icons-left">
-            <input id="password" class="input" type="password" placeholder="Password" name="password">
+            <input id="password" class="input is-rounded" type="password" placeholder="Password" name="password">
 
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
@@ -55,8 +55,7 @@ class = "background"
             </p>
           </div>
           <div class="column">
-            <p><a hfref="#">Forgot Password?</a></p>
-            <p><a hfref="#">New User?</a></p>
+            <p><a href="{% url " signUp" %}">New User?</a></p>
           </div>
 
         </div>
