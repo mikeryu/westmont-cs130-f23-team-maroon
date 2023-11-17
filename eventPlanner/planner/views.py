@@ -1,11 +1,12 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect,get_object_or_404
 from .models import Event, RSVP, Task
 from .forms import RSVPForm
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
+# messages framework 
+from django.contrib import messages
 
 
 """
@@ -181,3 +182,26 @@ def signup(request):
         
 
 
+
+"""
+Delete Event 
+First get event by id using get_object_or_404() and render the event_confirm_delete.html template
+If the event does not exist, then redirect to a 404 page.
+Second , render the event_confirm_delete.html template if the HTTP request is GET
+Third, delete the event, create a flash message and redirects to the event list if the HTTP request is POST
+Bonus, Prevent a user from deleting event of other host by checking if the host of the event is the same as the currently logged user.
+If yes , we render delete form. otherwise we can redirect the users to a 404 page.
+"""
+
+@login_required
+def delete_event(request, event_id):
+    queryset=Event.objects.filter(host=request.user)
+    event=get_object_or_404(queryset, pk=event_id)
+    context={'event':event}
+    if request.method == 'GET':
+        return render(request, 'event_confirm_delete.html',context)
+    elif request.method == 'POST':
+        event.delete()
+        messages.success(request, 'The event has been deleted successfully')
+        
+        return redirect('events')

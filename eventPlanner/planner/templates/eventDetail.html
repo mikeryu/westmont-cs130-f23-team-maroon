@@ -50,7 +50,10 @@
             <p class="m-2"> <i class="fa-regular fa-clock"></i> {{event.date}} at {{event.time}}</p>
 
             <p class="m-2"> {{event.description}}</p>
-            
+            <!-- DELETE EVENT -->
+            <div class="">
+                <a href="{% url 'delete-event' event.id %}" class="">Delete</a>
+            </div>
             <div class="title m-2">Sign up for a task!
             <div class="control">
                 <div  id = "tasks" class="is-one-fifth">

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{event.name}}|
+{% endblock %}
+
+{% block content %}
+<h2 class="">Delete Event</h2>
+<div class="">
+    <form action="{% url 'delete-event' event.id %}" method="post">
+        <p class="">Are you sure you want to delete the event <span class="">"{{event.name}}"</span>?</p>
+        <div class="">
+            <button type="submit" class="">Delete</button>
+            <a href="{% url 'events' %}" class="">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

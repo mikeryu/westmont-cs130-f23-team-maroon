@@ -78,10 +78,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'eventPlanner',
-        'USER': 'django',
-        'PASSWORD': 'password',
+        'USER': 'django', 
+        'PASSWORD': 'password',  
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '',   #3306
     }
 }
 

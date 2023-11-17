@@ -1,7 +1,14 @@
 {% extends "loggedInBase.html" %}
 
 {% block content %}
-
+<!-- Flash message  -->
+{% if messages %}
+{% for message in messages %}
+<div class="">
+<p class="">{{message}}</p>
+</div>
+{% endfor %}
+{% endif %}
 <section class="hero is-primary">
   <div class="hero-body">
     <div class="container">
