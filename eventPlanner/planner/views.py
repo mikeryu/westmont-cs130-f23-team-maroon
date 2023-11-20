@@ -58,7 +58,7 @@ def event(request, id):
             task = Task.objects.get(id=taskId)
         except Task.DoesNotExist:
             #if the tasks doesn't exist, we just assume the user is doing nothing for the event
-            task = Task(name = "do nothing", event  = Event.objects.get(id=id), completed = True)
+            task = Task(name = "only attend", event  = Event.objects.get(id=id), completed = True)
         task.completed = True
         task.save()
 
