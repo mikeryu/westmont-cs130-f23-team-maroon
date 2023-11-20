@@ -24,7 +24,13 @@
           <div class="tags">
             <span class="tag">{{event.location}}</span>
           </div>
-          <p>{{event.description}}</p>
+          {% if event.name|length < 26 %}
+            <p class="truncate-with-ellipsis2">{{event.description}}</p>
+          {% else %}
+            <p class="truncate-with-ellipsis">{{event.description}}</p>
+          {% endif %}
+
+          
         </div>
       </a>
     </div>
