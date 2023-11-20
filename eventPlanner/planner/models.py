@@ -15,6 +15,7 @@ class Event(models.Model):
     location = models.CharField(max_length=100)
     description = models.CharField(max_length=1000, default="Lorem ipsum blah blah blah") #Has a default value because it was implemented later
     user = models.ForeignKey(User, on_delete=models.CASCADE,default = None)
+
     """
     Features to be added in future releases
     capacity = models.IntegerField() 
