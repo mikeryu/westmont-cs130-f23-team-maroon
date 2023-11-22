@@ -1,4 +1,5 @@
 {% extends "loggedInBase.html" %}
+{% load humanize %}
 
 {%block content %}
 
@@ -70,7 +71,7 @@
 
             <p class="m-2"> <i class="fa-solid fa-map-location-dot"></i> {{event.location}}</p>
 
-            <p class="m-2"> <i class="fa-regular fa-clock"></i> {{event.date}} at {{event.time}}</p>
+            <p class="m-2"> <i class="fa-regular fa-clock"></i> {{event.date}} at {{event.time|naturaltime}}</p>
 
             <p class="m-2"> {{event.description}}</p>
             <br>
