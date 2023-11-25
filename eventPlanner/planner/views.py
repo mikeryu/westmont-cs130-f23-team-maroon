@@ -35,9 +35,8 @@ here user should be able to see a list of events
 @login_required
 def events(request):
     events = Event.objects.all()
-    context = {'events': events}
+    context = {'events': events, 'user': request.user}
     return render(request, 'browseEvents.html', context)
-
 
 
 """
@@ -58,7 +57,7 @@ def event(request, id):
             task = Task.objects.get(id=taskId)
         except Task.DoesNotExist:
             #if the tasks doesn't exist, we just assume the user is doing nothing for the event
-            task = Task(name = "do nothing", event  = Event.objects.get(id=id), completed = True)
+            task = Task(name = "only attend", event  = Event.objects.get(id=id), completed = True)
         task.completed = True
         task.save()
 
@@ -75,14 +74,11 @@ def event(request, id):
             return redirect('events')
         
         attendees = RSVP.objects.filter(event=event)
-    
 
         #otherwise, just render the event detail page with the event, form, tasks, and attendees
         tasks = Task.objects.filter(event = event, completed = False).values()
 
-        context = {'event': event, 'attendees': attendees, 'tasks': tasks, }
-        
-       
+        context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user }
         
         return render(request, 'eventDetail.html', context)
 
@@ -111,9 +107,11 @@ def createEvent(request):
 
         #Get the list of tasks from the form
         tasks = request.POST.getlist("task-item")
+        #Get the user of the event 
+        user = request.user
 
         #create the event
-        event = Event(name=name, host=host, location=location, date=date, time=time, description=description)
+        event = Event(name=name, host=host, location=location, date=date, time=time, description=description,user =user)
         #Save the event to the database
         event.save()
 
@@ -125,15 +123,24 @@ def createEvent(request):
  
         
         #Send the user to the browse events page
-        return redirect('events')
+        return redirect('event', id=event.id)
 
     else:
         #In the case of a GET request, just render the create event form
-        return render(request, 'createEvent.html')
+        return render(request, 'createEvent.html', {'user': request.user})
 
-
-
-
+@login_required
+def manageAccount(request):
+    if request.method == "POST":
+        newUsername = request.POST['username']
+        if User.objects.filter(username=newUsername).exists():
+            return render(request, 'manageAccount.html', {'error_message': 'Username is already taken'})
+        
+        currUser = request.user
+        currUser.username = newUsername
+        currUser.save()
+    
+    return render(request, 'manageAccount.html', {'user': request.user})
 
 """
 login page, here the user should be able to login
@@ -148,23 +155,18 @@ def userLogin(request):
 
     #if the user has submitted the login form, authenticate them and log them in
     if request.method == 'POST':
-        
-        username = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
 
         user = authenticate(username=username, password=password)
-        #if the user is authenticated, log them in and redirect them to the events page
+        # if the user is authenticated, log them in and redirect them to the events page
         if user is not None:
              login(request, user)
              return redirect(default_logged_in_redirect)
-        #otherwise, render the login page with an error message
-        else:
+        else: # otherwise, render the login page with an error message
             return render(request, 'login.html', context = {'error_message': 'Invalid login credientials'})
 
     return render(request, 'login.html')
-
-
-
 
 
 """
@@ -180,15 +182,23 @@ def signup(request):
         return redirect(default_logged_in_redirect)
     
     if request.method == 'POST':
-        username = request.POST['email']
+        username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
+        first = request.POST['first']
+        last = request.POST['last']
 
-        #check to see if the user already exists
+
+        # check to make sure the passwords match
+        if password != request.POST['password_again']:
+            return render(request, 'signUp.html', {'error_message': 'Passwords do not match'})
+
+        # check to see if the user already exists
         if User.objects.filter(username=username).exists():
-            return render(request, 'signUp.html', {'error_message': 'Email already exists'})
+            return render(request, 'signUp.html', {'error_message': 'Username already exists'})
         else:
-            #if the user doesn't already exist, we go ahead and crreate the user, then log them in
-            user = User.objects.create_user(username=username, email=username, password=password)
+            # if the user doesn't already exist, we go ahead and crreate the user, then log them in
+            user = User.objects.create_user(username=username, email=email, password=password, first_name=first, last_name=last)
             user.save()
     
             login(request, user)

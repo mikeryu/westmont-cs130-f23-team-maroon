@@ -3,7 +3,7 @@
 
 
 {% block class %}
-class = "background"
+
 {% endblock class %}
 
 
@@ -24,6 +24,42 @@ class = "background"
         {% if error_message %}
         <p>{{ error_message }}</p>
         {% endif %}
+        <!-- First Name field -->
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input id="first" class="input is-rounded" type="text" placeholder="First Name" name="first"
+              maxlength="256">
+            <span class="icon is-small is-left">
+              <i class="fa fa-hand-lizard-o"></i>
+            </span>
+            <span class="icon is-small is-right">
+            </span>
+          </p>
+        </div>
+        <!-- Last Name field -->
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input id="last" class="input is-rounded" type="text" placeholder="Last Name" name="last" maxlength="256">
+            <span class="icon is-small is-left">
+              <i class="fa fa-hand-lizard-o"></i>
+            </span>
+            <span class="icon is-small is-right">
+            </span>
+          </p>
+        </div>
+        <!-- Username field -->
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input id="username" class="input is-rounded" type="username" placeholder="Username" name="username"
+              maxlength="256">
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+            <span class="icon is-small is-right">
+            </span>
+          </p>
+        </div>
+
         <div class="field">
           <p class="control has-icons-left has-icons-right">
             <input id="email" class="input is-rounded" type="email" placeholder="Email" name="email" maxlength="256">
@@ -39,7 +75,8 @@ class = "background"
         <div class="field">
           <p class="control has-icons-left">
 
-            <input id="password" class="input is-rounded" type="password" placeholder="Password" name="password" maxlength="256">
+            <input id="password" class="input is-rounded" type="password" placeholder="Password" name="password"
+              maxlength="256">
 
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
@@ -47,6 +84,17 @@ class = "background"
           </p>
         </div>
 
+        <div class="field">
+          <p class="control has-icons-left">
+
+            <input id="password_again" class="input is-rounded" type="password" placeholder="Password"
+              name="password_again" maxlength="256">
+
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
 
         <div class="container has-text-centered">
           <div class="field">
@@ -59,7 +107,7 @@ class = "background"
             </p>
           </div>
           <div class="column">
-            <p><a href="{% url "loginPage" %}">Already have an account?</a></p>
+            <p><a href="{% url 'loginPage' %}">Already have an account?</a></p>
           </div>
 
         </div>
