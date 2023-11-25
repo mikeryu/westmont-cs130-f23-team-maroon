@@ -35,7 +35,7 @@ here user should be able to see a list of events
 @login_required
 def events(request):
     events = Event.objects.all()
-    context = {'events': events}
+    context = {'events': events, 'user': request.user}
     return render(request, 'browseEvents.html', context)
 
 
@@ -78,7 +78,7 @@ def event(request, id):
         #otherwise, just render the event detail page with the event, form, tasks, and attendees
         tasks = Task.objects.filter(event = event, completed = False).values()
 
-        context = {'event': event, 'attendees': attendees, 'tasks': tasks, }
+        context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user }
         
         return render(request, 'eventDetail.html', context)
 
@@ -121,11 +121,11 @@ def createEvent(request):
  
         
         #Send the user to the browse events page
-        return redirect('events')
+        return redirect('event', id=event.id)
 
     else:
         #In the case of a GET request, just render the create event form
-        return render(request, 'createEvent.html')
+        return render(request, 'createEvent.html', {'user': request.user})
 
 @login_required
 def manageAccount(request):
@@ -137,7 +137,8 @@ def manageAccount(request):
         currUser = request.user
         currUser.username = newUsername
         currUser.save()
-    return(render(request, 'manageAccount.html'))
+    
+    return render(request, 'manageAccount.html', {'user': request.user})
 
 """
 login page, here the user should be able to login

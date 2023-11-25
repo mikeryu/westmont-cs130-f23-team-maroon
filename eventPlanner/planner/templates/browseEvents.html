@@ -19,11 +19,8 @@
     {% for event in events %}
     <div class="column is-one-third">
       <a class = "event" href={% url "event" event.id%}>
-        <div class="box">
+        <div class="box is-rounded">
           <p class="title">{{event.name}}</p>
-          <div class="tags">
-            <span class="tag">{{event.location}}</span>
-          </div>
           {% if event.name|length < 26 %}
             <p class="truncate-with-ellipsis2">{{event.description}}</p>
           {% else %}
