@@ -81,7 +81,33 @@ class  Sprint4Tests(unittest.TestCase):
         that those input fields exist on the sign up page and assume that they information can be entered. 
     """
     def testcreateNewUsername(self):
-        pass
+        self.driver.find_element(By.ID, "logoutButton").click()
+        self.driver.find_element(By.ID, "signup").click()
+        try:    
+            self.driver.find_element(By.ID, "first")
+        except:
+            self.fail("first name input does not exist")
+        
+        try:
+            self.driver.find_element(By.ID, "last")
+        except:
+            self.fail("last name input does not exist")
+
+        try:
+            self.driver.find_element(By.ID, "username")
+        except:
+            self.fail("username input does not exist")
+
+        try:
+            self.driver.find_element(By.ID, "email")
+        except:
+            self.fail("email input does not exist")
+        
+
+        try:
+            self.driver.find_element(By.ID, "password")
+        except:
+            self.fail("password input does not exist")
         
     """
     Test for issue 100 - test case 12
@@ -136,7 +162,9 @@ class  Sprint4Tests(unittest.TestCase):
 
         
 
-    
+    def tearDown(self):
+        self.driver.quit()
+        print("testing complete")
         
 
     
