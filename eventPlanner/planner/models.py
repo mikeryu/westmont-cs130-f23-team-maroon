@@ -37,6 +37,8 @@ class Task(models.Model):
     
 # rsvp class
 # stores a singular RSVP for a given event
+# the reasoning behind making a task part of an RSVP instead of the 
+# other way around is that a task must be part of a RSVP, but an RSVP does not need a task
 class RSVP(models.Model):
     name = models.CharField(max_length=50)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, default=None)
