@@ -1,0 +1,59 @@
+#navbarLogo{
+   max-height:45px;
+}
+
+#homePageText{
+   font-size:400%;
+}
+
+html, body{
+   height: 100%;
+}
+
+body.background{
+
+   background-image: url("./home.441e9efa787b.svg");
+   background-color: white;;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: bottom;
+   background-attachment: fixed;
+
+
+   
+
+}
+
+@media(max-width: 768px){
+   body.background{
+      background-image: none;
+   }
+}
+
+
+.box {
+   height: 200px;
+}
+.box .title {
+   display: -webkit-box;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+.box p.truncate-with-ellipsis {
+   display: -webkit-box;
+   -webkit-line-clamp: 1; 
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+.box p.truncate-with-ellipsis2 {
+   display: -webkit-box;
+   -webkit-line-clamp: 2; 
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+
