@@ -9,6 +9,7 @@ def user_login(driver):
     driver.find_element(By.ID, "email").send_keys("test@gmail.com")
     driver.find_element(By.ID, "password").send_keys("test")
     driver.find_element(By.ID, "submit").click()
+
 # This defines a context manager for the Selenium WebDriver
 class ChromeDriver:
     def __init__(self):

@@ -1,0 +1,52 @@
+{% extends "loggedInBase.html" %}
+
+
+
+{% block class %}
+class = "background"
+{% endblock class %}
+
+
+
+{% block content %}
+<div class="container has-text-centered">
+    {% load static %}
+    <img src={% static "logo.png" %}>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="container is-flex is-justify-content-center is-align-items-center" id="loginContainer">
+        <div class="column is-centered is-6">
+            <div class="column">
+                {% if error_message %}
+                <p>{{ error_message }}</p>
+                {% endif %}
+                <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                    <p>Change your username</p>
+                    <input id="username" class="input" type="username" value={{user.username}} name="username">
+                    <span class="icon is-small is-left">
+                    </span>
+                    <span class="icon is-small is-right">
+                    </span>
+                    </p>
+                </div>
+
+                <div class="container has-text-centered">
+                    <div class="field">
+                        <p class="control">
+                            <button id="submit" class="button is-primary">
+                                Submit
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+
+{% endblock %}
