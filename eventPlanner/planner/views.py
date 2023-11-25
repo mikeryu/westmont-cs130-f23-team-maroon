@@ -107,9 +107,11 @@ def createEvent(request):
 
         #Get the list of tasks from the form
         tasks = request.POST.getlist("task-item")
+        #Get the user of the event 
+        user = request.user
 
         #create the event
-        event = Event(name=name, host=host, location=location, date=date, time=time, description=description)
+        event = Event(name=name, host=host, location=location, date=date, time=time, description=description,user =user)
         #Save the event to the database
         event.save()
 
