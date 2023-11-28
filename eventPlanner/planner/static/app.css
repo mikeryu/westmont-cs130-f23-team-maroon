@@ -24,6 +24,11 @@ body.background{
 
 }
 
+#task-item{
+   width: 450px;
+   max-width: 450px;
+}
+
 @media(max-width: 768px){
    body.background{
       background-image: none;
