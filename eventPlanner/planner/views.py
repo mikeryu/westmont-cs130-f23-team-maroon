@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from datetime import date, timedelta
+from datetime import date
 
 
 
@@ -35,8 +35,7 @@ here user should be able to see a list of events
 """
 @login_required
 def events(request):
-    deadline = date.today() - timedelta(days=1)
-    events = Event.objects.filter(date__gte=deadline).order_by("date")
+    events = Event.objects.filter(date__gte=date.today()).order_by("date")
     context = {'events': events, 'user': request.user}
     return render(request, 'browseEvents.html', context)
 
