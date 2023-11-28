@@ -39,4 +39,5 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Run tests
       run: |
+        python eventPlanner/manage.py runserver
         python eventPlanner/tests/user_account_tests.py
