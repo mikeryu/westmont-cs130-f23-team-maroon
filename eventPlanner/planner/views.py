@@ -49,7 +49,7 @@ if the user has submitted the RSVP form, save the RSVP to the database
 def event(request, id):
 
     if request.method == "POST":
-        name = request.POST["name"]
+        guests = request.POST["guests"]
         #grab the task id from the form
         taskId = request.POST.get('selectedTask')
 
@@ -62,7 +62,7 @@ def event(request, id):
         task.save()
 
         #create the RSVP and save it to the database
-        rsvp = RSVP(name=name, event=task.event, task=task)
+        rsvp = RSVP(name=request.user.username, event=task.event, task=task, guests=guests)
         rsvp.save()
 
         return redirect('event', id=id)
@@ -78,7 +78,11 @@ def event(request, id):
         #otherwise, just render the event detail page with the event, form, tasks, and attendees
         tasks = Task.objects.filter(event = event, completed = False).values()
 
-        context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user }
+        headCount = 0
+        for task in tasks:
+            headCount += task.guests
+
+        context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user, 'headCount':headCount, }
         
         return render(request, 'eventDetail.html', context)
 

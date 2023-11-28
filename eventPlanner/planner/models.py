@@ -41,6 +41,7 @@ class RSVP(models.Model):
     name = models.CharField(max_length=50)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, default=None)
     task = models.ForeignKey(Task, on_delete=models.CASCADE, default=None, null=True)
+    guests = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
