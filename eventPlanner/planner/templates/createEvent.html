@@ -60,7 +60,7 @@
       <div class="field">
         <label class="label">Date</label>
         <div class="control has-icons-left">
-          <input class="input is-rounded" type="text" placeholder="Enter Date" name="date" maxlength="100" required=True>
+          <input class="input is-rounded" type="date" placeholder="Enter Date" name="date" maxlength="100" required=True>
           <span class="icon is-left">
             <i class="fa-solid fa-calendar-days"></i>
           </span>
@@ -70,7 +70,7 @@
       <div class="field">
         <label class="label">Time</label>
         <div class="control has-icons-left">
-          <input id="time" class="input is-rounded" type="text" placeholder="Enter Time" name="time" maxlength="100" required=True>
+          <input id="time" class="input is-rounded" type="time" placeholder="Enter Time" name="time" maxlength="100" required=True>
           <span class="icon is-left">
             <i class="fa-solid fa-clock"></i>
           </span>
@@ -90,7 +90,7 @@
       <div class="field">
         <label class="label">Tasks</label>
         <div class="control">
-          <div id="tasks" class='is-one-fifth'>
+          <div id="tasks" class='is-one-fifth' maxlength="30">
           </div>
         </div>
       </div>
@@ -103,8 +103,8 @@
             <button class="delete" type="button" aria-label="close"></button>
           </header>
           <section class="modal-card-body">
-            <h1 class="subtitle">Enter Task</h1>
-            <input id="taskInput" class="input is-primary" type="text" placeholder="Enter your task.">
+            <h1 class="subtitle">Enter Task (30 characters maximum)</h1>
+            <input id="taskInput" class="input is-primary" type="text" placeholder="Enter your task." maxlength="30">
           </section>
           <footer class="modal-card-foot">
             <button id="addTaskButton" type="button" class="button is-success">Add</button>
@@ -127,7 +127,7 @@
           <button id="submit" class="button is-primary" type="submit">Create!</button>
         </div>
         <div class="control">
-          <button class="button is-light" type="button">Cancel</button>
+          <a href={% url "events" %}><button class="button is-light" type="button">Cancel</button></a>
         </div>
       </div>
     </form>

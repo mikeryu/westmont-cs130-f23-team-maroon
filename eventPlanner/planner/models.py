@@ -10,8 +10,8 @@ from django.contrib.auth.models import User
 class Event(models.Model):
     name = models.CharField(max_length=250)
     host = models.CharField(max_length= 100, default="Joe") #Has a default value because it was implemented later
-    date = models.CharField(max_length=100) #Need to be updated to DateField in future release
-    time = models.CharField(max_length=100)  #Need to be updated to TimeField in future release
+    date = models.DateField(max_length=100) #Need to be updated to DateField in future release
+    time = models.TimeField(max_length=100)  #Need to be updated to TimeField in future release
     location = models.CharField(max_length=100)
     description = models.CharField(max_length=1000, default="Lorem ipsum blah blah blah") #Has a default value because it was implemented later
     user = models.ForeignKey(User, on_delete=models.CASCADE,default = None)

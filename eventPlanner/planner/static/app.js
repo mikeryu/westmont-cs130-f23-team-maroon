@@ -6,7 +6,7 @@ $(document).ready(function () {
     let task = $("#taskInput").val();
     if (task != "") {
       $('#tasks').addClass('column');
-      $('#tasks').append("<input name ='task-item' class='input is-rounded my-1' type='text' value='" + task + "' />");
+      $('#tasks').append("<input name ='task-item' id='task-item' class='input is-rounded my-1' type='text' maxlength='30' value='" + task + "' />");
     }
   });
 });
