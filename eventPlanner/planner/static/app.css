@@ -11,12 +11,22 @@ html, body{
 }
 
 body.background{
+
    background-image: url("./home.svg");
+   background-color: white;;
    background-repeat: no-repeat;
    background-size: cover;
    background-position: bottom;
+   background-attachment: fixed;
+
+
    
 
+}
+
+#task-item{
+   width: 450px;
+   max-width: 450px;
 }
 
 @media(max-width: 768px){

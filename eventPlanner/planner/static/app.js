@@ -6,7 +6,7 @@ $(document).ready(function () {
     let task = $("#taskInput").val();
     if (task != "") {
       $('#tasks').addClass('column');
-      $('#tasks').append("<input name ='task-item' class='input is-rounded my-1' type='text' value='" + task + "' />");
+      $('#tasks').append("<input name ='task-item' id='task-item' class='input is-rounded my-1' type='text' maxlength='30' value='" + task + "' />");
     }
   });
 });
@@ -53,6 +53,29 @@ document.addEventListener('DOMContentLoaded', () => {
       closeAllModals();
     }
   });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+
+    });
+  });
+
 });
 
 
