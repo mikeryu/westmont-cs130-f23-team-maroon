@@ -79,8 +79,8 @@ def event(request, id):
         tasks = Task.objects.filter(event = event, completed = False).values()
 
         headCount = 0
-        for task in tasks:
-            headCount += task.guests
+        for attendee in attendees:
+            headCount += attendee.guests
 
         context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user, 'headCount':headCount, }
         
@@ -191,7 +191,6 @@ def signup(request):
         password = request.POST['password']
         first = request.POST['first']
         last = request.POST['last']
-
 
         # check to make sure the passwords match
         if password != request.POST['password_again']:
