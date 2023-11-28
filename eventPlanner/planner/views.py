@@ -148,6 +148,19 @@ def manageAccount(request):
     
     return render(request, 'manageAccount.html', {'user': request.user})
 
+@login_required
+def myEvents(request):
+    myHostedEvents = Event.objects.filter(user=request.user).order_by("date")
+    myRSVP = RSVP.objects.filter(name=request.user)
+
+    myRSVPEvents = []
+    for rsvp in myRSVP:
+        myRSVPEvents.append(rsvp.event)
+
+    context = {'myHostedEvents': myHostedEvents, 'myRSVPEvents': myRSVPEvents, 'user': request.user}
+    return render(request, 'myEvents.html', context)
+
+
 """
 login page, here the user should be able to login
 logs in the user and redirects them to the events page

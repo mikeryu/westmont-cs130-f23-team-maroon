@@ -42,8 +42,12 @@
           Events
         </a>
 
-        <a id = 'planEvent' class="navbar-item" href={% url "createEvent" %}>
+        <a id='planEvent' class="navbar-item" href={% url "createEvent" %}>
           Plan Event
+        </a>
+
+        <a id='planEvent' class="navbar-item" href={% url "myEvents" %}>
+          My Events
         </a>
       </div>
 
@@ -53,10 +57,10 @@
         </div>
         <div class="navbar-item">
           <div class="buttons">
-            <a id = "logoutButton" href="{% url 'logout' %}" class="button is-primary">
+            <a id="logoutButton" href="{% url 'logout' %}" class="button is-primary">
               <strong>Log out</strong>
             </a>
-            <a id = "manageAccount" href="{% url 'manageAccount' %}" class="button is-light">
+            <a id="manageAccount" href="{% url 'manageAccount' %}" class="button is-light">
               Manage Account
             </a>
           </div>
