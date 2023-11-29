@@ -1,0 +1,52 @@
+{% extends "loggedInBase.html" %}
+
+{% block content %}
+
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                <i class="fa-solid fa-calendar-days"></i>
+                My Events
+            </h1>
+        </div>
+    </div>
+</section>
+<br>
+<div class="container">
+    <div class="columns is-multiline">
+        <br>
+        <div class="column is-one-half">
+            <h1 class="title">My Hosted Events</h1>
+            {% for event in myHostedEvents %}
+            <a class="event" href={% url "event" event.id%}>
+                <div class="box is-rounded mt-4">
+                    <p class="title">{{event.name}}</p>
+                    {% if event.name|length < 26 %} <p class="truncate-with-ellipsis2">{{event.description}}</p>
+                        {% else %}
+                        <p class="truncate-with-ellipsis">{{event.description}}</p>
+                        {% endif %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        <div class="column is-one-half">
+            <h1 class="title">My RSVP'd Events</h1>
+            {% for event in myRSVPEvents %}
+            <a class="event" href={% url "event" event.id%}>
+                <div class="box is-rounded mt-4">
+                    <p class="title">{{event.name}}</p>
+                    {% if event.name|length < 26 %} <p class="truncate-with-ellipsis2">{{event.description}}</p>
+                        {% else %}
+                        <p class="truncate-with-ellipsis">{{event.description}}</p>
+                        {% endif %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% load static %}
+<script src="{% static 'app.js' %}"></script>
+
+{% endblock %}
