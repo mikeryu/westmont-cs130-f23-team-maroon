@@ -77,7 +77,13 @@ body.background2{
    border-radius: 50px;
    padding: 35px;
    margin: 25px 10px;
+   transition: 0.35s;
    
+}
+
+.webSection:hover{
+   transform: translateY(-10px);
+   transition: 0.35s;
 }
 
 
