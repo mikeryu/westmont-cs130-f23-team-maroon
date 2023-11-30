@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from datetime import date
 
 
 
@@ -34,9 +35,10 @@ here user should be able to see a list of events
 """
 @login_required
 def events(request):
-    events = Event.objects.all()
+    events = Event.objects.filter(date__gte=date.today()).order_by("date")
     context = {'events': events, 'user': request.user}
     return render(request, 'browseEvents.html', context)
+
 
 
 """
@@ -49,7 +51,7 @@ if the user has submitted the RSVP form, save the RSVP to the database
 def event(request, id):
 
     if request.method == "POST":
-        name = request.POST["name"]
+        guests = request.POST["guests"]
         #grab the task id from the form
         taskId = request.POST.get('selectedTask')
 
@@ -60,10 +62,14 @@ def event(request, id):
             task = Task(name = "only attend", event  = Event.objects.get(id=id), completed = True)
         task.completed = True
         task.save()
+        task.event.completedTasks += 1
 
         #create the RSVP and save it to the database
-        rsvp = RSVP(name=name, event=task.event, task=task)
+        rsvp = RSVP(name=request.user.username, event=task.event, task=task, guests=guests)
         rsvp.save()
+
+        task.event.attendees += int(guests)
+        task.event.save()
 
         return redirect('event', id=id)
 
@@ -78,7 +84,11 @@ def event(request, id):
         #otherwise, just render the event detail page with the event, form, tasks, and attendees
         tasks = Task.objects.filter(event = event, completed = False).values()
 
-        context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user }
+        headCount = 0
+        for attendee in attendees:
+            headCount += attendee.guests
+
+        context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user, 'headCount':headCount, }
         
         return render(request, 'eventDetail.html', context)
 
@@ -111,7 +121,7 @@ def createEvent(request):
         user = request.user
 
         #create the event
-        event = Event(name=name, host=host, location=location, date=date, time=time, description=description,user =user)
+        event = Event(name=name, host=host, location=location, date=date, time=time, description=description,user=user, completedTasks=0, totalTasks=len(tasks))
         #Save the event to the database
         event.save()
 
@@ -139,8 +149,30 @@ def manageAccount(request):
         currUser = request.user
         currUser.username = newUsername
         currUser.save()
+        return redirect('myEvents')
     
     return render(request, 'manageAccount.html', {'user': request.user})
+
+
+
+@login_required
+def myEvents(request):
+    myHostedEvents = Event.objects.filter(user=request.user).order_by("date")
+    myRSVP = RSVP.objects.filter(name=request.user)
+
+    myRSVPEvents = []
+    for rsvp in myRSVP:
+        myRSVPEvents.append(rsvp.event)
+
+    tasks = []
+    for rsvp in myRSVP:
+        if rsvp.task != None and str(rsvp.task) != "only attend":
+            tasks.append(rsvp.task)
+
+
+    context = {'myHostedEvents': myHostedEvents, 'myRSVPEvents': myRSVPEvents, 'user': request.user, 'tasks': tasks}
+    return render(request, 'myEvents.html', context)
+
 
 """
 login page, here the user should be able to login
@@ -187,7 +219,6 @@ def signup(request):
         password = request.POST['password']
         first = request.POST['first']
         last = request.POST['last']
-
 
         # check to make sure the passwords match
         if password != request.POST['password_again']:

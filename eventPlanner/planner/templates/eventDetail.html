@@ -3,7 +3,7 @@
 
 {%block content %}
 
-<section class="hero is-primary">
+<section class="hero is-primary pt-6">
     <div class="hero-body">
         <div class="container">
             <h1 class="title">
@@ -28,29 +28,26 @@
             <section class="modal-card-body">
                 {% csrf_token %}
                 <div class="field">
-                    <label class="label">Name</label>
+                    <label class="label">How many guests will you bring?</label>
                     <div class="control">
-                        <input class="input" type="text" name="name" placeholder="Name">
+                        <input class="input" type="number" name="guests" placeholder="0">
                     </div>
                 </div>
 
                 <div class="field">
-                    <label class="label">Select an option:</label>
+                    <label class="label">Sign Up for a Task!:</label>
                     <div class="control">
                         <div class="select">
-                            <select name = "selectedTask">
-                                    <option value = "-1">I don't want to help out.</option>
+                            <select name="selectedTask">
+                                <option value="-1">I don't want to help out.</option>
                                 {% for task in tasks%}
-                                    <option value = "{{task.id}}">{{task.name}}</option>
+                                <option value="{{task.id}}">{{task.name}}</option>
                                 {% endfor %}
                             </select>
                         </div>
                     </div>
                 </div>
 
-                
-                
-            
             </section>
             <footer class="modal-card-foot">
                 <button type="submit" class="button is-success">RSVP</button>
@@ -88,15 +85,15 @@
             </div>
             {% endif %}
 
-
             <button class="rsvp-button button is-primary ml-3 m-2 js-modal-trigger" data-target="rsvp">RSVP!</button>
         </div>
 
         <div class="column">
             <h1 class="title m-2">Attendees</h1>
+            <h2 class="subtitle m-2">Total Count: {{headCount}}</h2>
             {% for attendee in attendees%}
 
-            <p class="atendee ml-2 m-1">{{attendee.name}} will: {{attendee.task}}</p>
+            <p class="atendee ml-2 m-1">{{attendee.name}} will: {{attendee.task}}, with {{attendee.guests}} guests </p>
 
             {% endfor %}
         </div>

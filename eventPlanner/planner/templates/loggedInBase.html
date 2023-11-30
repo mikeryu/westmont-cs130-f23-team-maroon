@@ -19,7 +19,7 @@
 
 <body {% block class %}{% endblock class %}>
 
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href={% url "home" %}>
         <img src="{% static 'logoCropped.png' %}" id="navbarLogo">
@@ -34,7 +34,7 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item" href={% url "home" %}>
+        <a class="navbar-item" href={% url "myEvents" %}>
           Home
         </a>
 
@@ -42,9 +42,10 @@
           Events
         </a>
 
-        <a class="navbar-item" href={% url "createEvent" %}>
+        <a id='planEvent' class="navbar-item" href={% url "createEvent" %}>
           Plan Event
         </a>
+
       </div>
 
       <div class="navbar-end">
@@ -53,11 +54,8 @@
         </div>
         <div class="navbar-item">
           <div class="buttons">
-            <a href="{% url 'logout' %}" class="button is-primary">
-              <strong>Log out</strong>
-            </a>
-            <a href="{% url 'manageAccount' %}" class="button is-light">
-              Manage Account
+            <a id="logoutButton" href="{% url 'logout' %}" class="button is-primary">
+              <strong>Logout</strong>
             </a>
           </div>
         </div>
