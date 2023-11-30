@@ -18,11 +18,19 @@ body.background{
    background-size: cover;
    background-position: bottom;
    background-attachment: fixed;
-
-
-   
-
 }
+
+body.background2{
+   background: linear-gradient(335deg, #D21D50 20%, #FAAFB8  100%); 
+   background-repeat: no-repeat;
+   background-position: center;
+   background-attachment: fixed;
+   min-height: 100%;
+   height: auto;
+}
+
+
+
 
 #task-item{
    width: 450px;
@@ -62,3 +70,25 @@ body.background{
 }
 
 
+
+
+.webSection{
+   background-color: rgba(230, 230, 230, 0.4);
+   border-radius: 50px;
+   padding: 35px;
+   margin: 25px 0px;
+   
+
+   
+}
+
+.webSectionText{
+   color:black !important;
+   opacity: 1;
+   margin:0px 0px !important;
+}
+
+
+a{
+   color: black;
+}
