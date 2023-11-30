@@ -7,7 +7,7 @@ urlpatterns = [
 
     path('event/<int:id>', views.event, name = 'event'),  
     path('createEvent', views.createEvent, name = 'createEvent'),
-    path('myEvents', views.myEvents, name = 'myEvents'),
+    path('EventCenter', views.myEvents, name = 'myEvents'),
     path('login', views.userLogin, name = 'loginPage'),
     path('signup', views.signup, name = 'signUp'),
     path('manageAccount', views.manageAccount, name='manageAccount'),
