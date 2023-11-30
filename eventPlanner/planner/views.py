@@ -62,10 +62,14 @@ def event(request, id):
             task = Task(name = "only attend", event  = Event.objects.get(id=id), completed = True)
         task.completed = True
         task.save()
+        task.event.completedTasks += 1
 
         #create the RSVP and save it to the database
         rsvp = RSVP(name=request.user.username, event=task.event, task=task, guests=guests)
         rsvp.save()
+
+        task.event.attendees += int(guests)
+        task.event.save()
 
         return redirect('event', id=id)
 
@@ -117,7 +121,7 @@ def createEvent(request):
         user = request.user
 
         #create the event
-        event = Event(name=name, host=host, location=location, date=date, time=time, description=description,user =user)
+        event = Event(name=name, host=host, location=location, date=date, time=time, description=description,user=user, completedTasks=0, totalTasks=len(tasks))
         #Save the event to the database
         event.save()
 
@@ -145,8 +149,30 @@ def manageAccount(request):
         currUser = request.user
         currUser.username = newUsername
         currUser.save()
+        return redirect('myEvents')
     
     return render(request, 'manageAccount.html', {'user': request.user})
+
+
+
+@login_required
+def myEvents(request):
+    myHostedEvents = Event.objects.filter(user=request.user).order_by("date")
+    myRSVP = RSVP.objects.filter(name=request.user)
+
+    myRSVPEvents = []
+    for rsvp in myRSVP:
+        myRSVPEvents.append(rsvp.event)
+
+    tasks = []
+    for rsvp in myRSVP:
+        if rsvp.task != None and str(rsvp.task) != "only attend":
+            tasks.append(rsvp.task)
+
+
+    context = {'myHostedEvents': myHostedEvents, 'myRSVPEvents': myRSVPEvents, 'user': request.user, 'tasks': tasks}
+    return render(request, 'myEvents.html', context)
+
 
 """
 login page, here the user should be able to login
