@@ -1,0 +1,101 @@
+#navbarLogo{
+   max-height:45px;
+}
+
+#homePageText{
+   font-size:400%;
+}
+
+html, body{
+   height: 100%;
+}
+
+body.background{
+
+   background-image: url("./home.441e9efa787b.svg");
+   background-color: white;;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: bottom;
+   background-attachment: fixed;
+}
+
+body.background2{
+   background: linear-gradient(335deg, #D21D50 20%, #FAAFB8  100%); 
+   background-repeat: no-repeat;
+   background-position: center;
+   background-attachment: fixed;
+   min-height: 100%;
+   height: auto;
+}
+
+
+
+
+#task-item{
+   width: 450px;
+   max-width: 450px;
+}
+
+@media(max-width: 768px){
+   body.background{
+      background-image: none;
+   }
+}
+
+
+.box {
+   height: 200px;
+}
+.box .title {
+   display: -webkit-box;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+.box p.truncate-with-ellipsis {
+   display: -webkit-box;
+   -webkit-line-clamp: 1; 
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+.box p.truncate-with-ellipsis2 {
+   display: -webkit-box;
+   -webkit-line-clamp: 2; 
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+
+
+
+.webSection{
+   background-color: rgba(230, 230, 230, 0.4);
+   border-radius: 50px;
+   padding: 35px;
+   margin: 25px 10px;
+   transition: 0.35s;
+   
+}
+
+.webSection:hover{
+   transform: translateY(-10px);
+   transition: 0.35s;
+}
+
+
+.webSectionText{
+   color:black !important;
+   opacity: 1;
+   margin:0px 0px !important;
+}
+
+
+a{
+   color: black;
+}
+
+
