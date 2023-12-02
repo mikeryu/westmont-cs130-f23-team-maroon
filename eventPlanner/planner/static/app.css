@@ -98,4 +98,10 @@ a{
    color: black;
 }
 
+.closerCards{
+   margin: 10px 5px !important;
+}
 
+.noBounce:hover{
+   transform: translateY(0px) !important;
+}
