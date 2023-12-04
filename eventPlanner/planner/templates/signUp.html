@@ -3,118 +3,113 @@
 
 
 {% block class %}
-
+class = "background"
 {% endblock class %}
 
 
 
 {% block content %}
 
-<div class="container has-text-centered">
-  {% load static %}
-  <img src={% static "logo.png" %}>
-</div>
+
+<div class "container text-center">
+  <div class = "columns is-centered">
+    <div class = "webSection column is-two-fifths loginSection"> 
+      <h1 class="title is-3">Sign Up</h1>
+      <form method="post" class>
+        {% csrf_token %}
+              {% if error_message %}
+              <p>{{ error_message }}</p>
+              {% endif %}
+              <!-- First Name field -->
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <input id="first" class="input is-rounded"  type="text" placeholder="First Name" name="first"
+                    maxlength="256">
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-hand-lizard-o"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                  </span>
+                </p>
+              </div>
+              <!-- Last Name field -->
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <input id="last" class="input is-rounded" type="text" placeholder="Last Name" name="last" maxlength="256">
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-hand-lizard-o"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                  </span>
+                </p>
+              </div>
+              <!-- Username field -->
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <input id="username" class="input is-rounded" type="username" placeholder="Username" name="username"
+                    maxlength="256">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                  </span>
+                </p>
+              </div>
+
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <input id="email" class="input is-rounded" type="email" placeholder="Email" name="email" maxlength="256">
+
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                  </span>
+                </p>
+              </div>
+
+              <div class="field">
+                <p class="control has-icons-left">
+
+                  <input id="password" class="input is-rounded" type="password" placeholder="Password" name="password"
+                    maxlength="256">
+
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                </p>
+              </div>
+
+              <div class="field">
+                <p class="control has-icons-left">
+
+                  <input id="password_again" class="input is-rounded" type="password" placeholder="Password"
+                    name="password_again" maxlength="256">
+
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                </p>
+              </div>
+
+              <div class="container has-text-centered">
+                <div class="field">
+                  <p class="control">
+
+                    <button class="button is-primary">
+                      Sign Up!
+                    </button>
+                  </p>
+                </div>
+    
+                  <p><a href="{% url 'loginPage' %}">Already have an account?</a></p>
 
 
-<form method="post">
-  {% csrf_token %}
-  <div class="container is-flex is-justify-content-center is-align-items-center" id="loginContainer">
-    <div class="column is-centered is-6">
-      <div class="column">
-        {% if error_message %}
-        <p>{{ error_message }}</p>
-        {% endif %}
-        <!-- First Name field -->
-        <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <input id="first" class="input is-rounded" type="text" placeholder="First Name" name="first"
-              maxlength="256">
-            <span class="icon is-small is-left">
-              <i class="fa fa-hand-lizard-o"></i>
-            </span>
-            <span class="icon is-small is-right">
-            </span>
-          </p>
-        </div>
-        <!-- Last Name field -->
-        <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <input id="last" class="input is-rounded" type="text" placeholder="Last Name" name="last" maxlength="256">
-            <span class="icon is-small is-left">
-              <i class="fa fa-hand-lizard-o"></i>
-            </span>
-            <span class="icon is-small is-right">
-            </span>
-          </p>
-        </div>
-        <!-- Username field -->
-        <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <input id="username" class="input is-rounded" type="username" placeholder="Username" name="username"
-              maxlength="256">
-            <span class="icon is-small is-left">
-              <i class="fas fa-user"></i>
-            </span>
-            <span class="icon is-small is-right">
-            </span>
-          </p>
-        </div>
+              </div>
 
-        <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <input id="email" class="input is-rounded" type="email" placeholder="Email" name="email" maxlength="256">
-
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
-            </span>
-            <span class="icon is-small is-right">
-            </span>
-          </p>
-        </div>
-
-        <div class="field">
-          <p class="control has-icons-left">
-
-            <input id="password" class="input is-rounded" type="password" placeholder="Password" name="password"
-              maxlength="256">
-
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-        </div>
-
-        <div class="field">
-          <p class="control has-icons-left">
-
-            <input id="password_again" class="input is-rounded" type="password" placeholder="Password"
-              name="password_again" maxlength="256">
-
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-        </div>
-
-        <div class="container has-text-centered">
-          <div class="field">
-            <p class="control">
-
-              <button class="button is-primary">
-
-                Sign Up!
-              </button>
-            </p>
-          </div>
-          <div class="column">
-            <p><a href="{% url 'loginPage' %}">Already have an account?</a></p>
-          </div>
-
-        </div>
-
-      </div>
+            </div>
+      </form>
     </div>
   </div>
-  </div>
-</form>
+</div>
 {% endblock %}
