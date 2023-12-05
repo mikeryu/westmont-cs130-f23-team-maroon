@@ -14,7 +14,7 @@ Once the user has been logged in, there may be pages we do not want them to acce
 If they do try to access those pages, we want to redirect them to a different page.
 That page is defined here.
 """
-default_logged_in_redirect = 'events'
+default_logged_in_redirect = 'myEvents'
 
 
 """
