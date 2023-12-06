@@ -9,6 +9,25 @@ id = "homeBackground" class = "background2"
 <section class="hero is-primary pt-6">
 
 </section>
+
+<div class="modal" id="addTask">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Add Tasks</p>
+      <button class="delete" type="button" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <h1 class="subtitle">Enter Task (30 characters maximum)</h1>
+      <input id="taskInput" class="input is-primary" type="text" placeholder="Enter your task." maxlength="30">
+    </section>
+    <footer class="modal-card-foot">
+      <button id="addTaskButton" type="button" class="button is-success">Add</button>
+      <button type="button" class="button">Cancel</button>
+    </footer>
+  </div>
+</div>
+
 <br>
 
 <div class="container is-fluid mt-4">
@@ -94,24 +113,6 @@ id = "homeBackground" class = "background2"
         <div class="control">
           <div id="tasks" class='is-one-fifth' maxlength="30">
           </div>
-        </div>
-      </div>
-
-      <div class="modal" id="addTask">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">Add Tasks</p>
-            <button class="delete" type="button" aria-label="close"></button>
-          </header>
-          <section class="modal-card-body">
-            <h1 class="subtitle">Enter Task (30 characters maximum)</h1>
-            <input id="taskInput" class="input is-primary" type="text" placeholder="Enter your task." maxlength="30">
-          </section>
-          <footer class="modal-card-foot">
-            <button id="addTaskButton" type="button" class="button is-success">Add</button>
-            <button type="button" class="button">Cancel</button>
-          </footer>
         </div>
       </div>
 
