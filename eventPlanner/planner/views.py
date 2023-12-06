@@ -94,7 +94,7 @@ def event(request, id):
 
         headCount = 0
         for attendee in attendees:
-            headCount += attendee.guests
+            headCount += attendee.guests + 1
 
         context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user, 'headCount':headCount, 'rsvp':rsvp }
         
