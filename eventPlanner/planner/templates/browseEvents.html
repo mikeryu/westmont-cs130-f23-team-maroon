@@ -29,13 +29,14 @@ id = "homeBackground" class = "background2"
           <p class="title is-size-4 webSectionText">{{event.name}}</p>
           <p class="m-1"> <i class="fas fa-user"></i> {{event.user}}</p>
           <p class="m-1"> <i class="fa-regular fa-calendar-days"></i> {{event.time}} on {{event.date}}</p>
-          {% if event.name|length < 26 %}
-            <p class="truncate-with-ellipsis2">{{event.description}}</p>
-          {% else %}
-            <p class="truncate-with-ellipsis">{{event.description}}</p>
-          {% endif %}
-          <br>
-          
+          <div class = "webSectionText" >
+            {% if event.name|length < 26 %}
+              <p class="truncate-with-ellipsis2">{{event.description}}</p>
+            {% else %}
+              <p class="truncate-with-ellipsis">{{event.description}}</p>
+            {% endif %}
+            <br>
+          </div>     
         </div>
       </a>
     </div>

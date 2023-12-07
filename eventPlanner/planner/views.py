@@ -117,7 +117,6 @@ def createEvent(request):
         
         #Using the POST data from the form to create an event
         name = request.POST["name"]
-        host = request.POST["host"]
         location = request.POST["location"]
         date = request.POST["date"]
         time = request.POST["time"]
@@ -129,7 +128,7 @@ def createEvent(request):
         user = request.user
 
         #create the event
-        event = Event(name=name, host=host, location=location, date=date, time=time, description=description,user=user, completedTasks=0, totalTasks=len(tasks))
+        event = Event(name=name, location=location, date=date, time=time, description=description,user=user, completedTasks=0, totalTasks=len(tasks))
         #Save the event to the database
         event.save()
 
