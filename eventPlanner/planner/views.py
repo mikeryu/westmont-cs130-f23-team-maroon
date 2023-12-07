@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from datetime import date
 
 
@@ -14,7 +15,7 @@ Once the user has been logged in, there may be pages we do not want them to acce
 If they do try to access those pages, we want to redirect them to a different page.
 That page is defined here.
 """
-default_logged_in_redirect = 'events'
+default_logged_in_redirect = 'myEvents'
 
 
 """
@@ -65,11 +66,16 @@ def event(request, id):
         task.event.completedTasks += 1
 
         #create the RSVP and save it to the database
-        rsvp = RSVP(name=request.user.username, event=task.event, task=task, guests=guests)
+        rsvp = RSVP(name=request.user.username, event=task.event, task=task, guests=guests ,rsvp = True)
         rsvp.save()
 
         task.event.attendees += int(guests)
         task.event.save()
+
+
+
+
+
 
         return redirect('event', id=id)
 
@@ -80,15 +86,17 @@ def event(request, id):
             return redirect('events')
         
         attendees = RSVP.objects.filter(event=event)
+        rsvp = RSVP.objects.filter(event = event, name = request.user, rsvp = True)
+
 
         #otherwise, just render the event detail page with the event, form, tasks, and attendees
         tasks = Task.objects.filter(event = event, completed = False).values()
 
         headCount = 0
         for attendee in attendees:
-            headCount += attendee.guests
+            headCount += attendee.guests + 1
 
-        context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user, 'headCount':headCount, }
+        context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user, 'headCount':headCount, 'rsvp':rsvp }
         
         return render(request, 'eventDetail.html', context)
 
@@ -109,7 +117,6 @@ def createEvent(request):
         
         #Using the POST data from the form to create an event
         name = request.POST["name"]
-        host = request.POST["host"]
         location = request.POST["location"]
         date = request.POST["date"]
         time = request.POST["time"]
@@ -121,7 +128,7 @@ def createEvent(request):
         user = request.user
 
         #create the event
-        event = Event(name=name, host=host, location=location, date=date, time=time, description=description,user=user, completedTasks=0, totalTasks=len(tasks))
+        event = Event(name=name, location=location, date=date, time=time, description=description,user=user, completedTasks=0, totalTasks=len(tasks))
         #Save the event to the database
         event.save()
 

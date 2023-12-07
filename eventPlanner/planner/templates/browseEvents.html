@@ -1,33 +1,42 @@
 {% extends "loggedInBase.html" %}
+{% load humanize %}
+
+{%block class%}
+id = "homeBackground" class = "background2"
+{% endblock %}
 
 {% block content %}
 
-<section class="hero is-primary pt-6">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        <i class="fa-solid fa-calendar-days"></i>
-        All Events
-      </h1>
-    </div>
-  </div>
+<br>
+<section class="hero pt-6">
+  
 </section>
 
 <div class="container">
-  <br>
+  <div class="webSection noBounce">
+    <div class="container">
+      <h1 class="is-size-3 webSectionText">
+        <i class="fa-solid fa-calendar-days"></i>
+        Browse Events
+      </h1>
+    </div>
+  </div>
   <div class="columns is-multiline">
     {% for event in events %}
     <div class="column is-one-third">
       <a class = "event" href={% url "event" event.id%}>
-        <div class="box is-rounded">
-          <p class="title">{{event.name}}</p>
-          {% if event.name|length < 26 %}
-            <p class="truncate-with-ellipsis2">{{event.description}}</p>
-          {% else %}
-            <p class="truncate-with-ellipsis">{{event.description}}</p>
-          {% endif %}
-
-          
+        <div class="webSection box is-rounded closerCards">
+          <p class="title is-size-4 webSectionText">{{event.name}}</p>
+          <p class="m-1"> <i class="fas fa-user"></i> {{event.user}}</p>
+          <p class="m-1"> <i class="fa-regular fa-calendar-days"></i> {{event.time}} on {{event.date}}</p>
+          <div class = "webSectionText" >
+            {% if event.name|length < 26 %}
+              <p class="truncate-with-ellipsis2">{{event.description}}</p>
+            {% else %}
+              <p class="truncate-with-ellipsis">{{event.description}}</p>
+            {% endif %}
+            <br>
+          </div>     
         </div>
       </a>
     </div>
