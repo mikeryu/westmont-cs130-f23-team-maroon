@@ -109,3 +109,18 @@ a{
 .noBounce:hover{
    transform: translateY(0px) !important;
 }
+
+.hide {
+   display: none;
+
+   
+   
+ }
+
+
+ 
+#rsvpButton:hover + .hide {
+   display: block;
+   color: red;
+
+ }

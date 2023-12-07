@@ -24,7 +24,7 @@ id = "homeBackground" class = "background2"
                 <div class="field">
                     <label class="label">How many guests will you bring?</label>
                     <div class="control">
-                        <input class="input" type="number" name="guests" placeholder="0">
+                        <input class="input" type="number" name="guests" value="0">
                     </div>
                 </div>
 
@@ -44,9 +44,14 @@ id = "homeBackground" class = "background2"
 
             </section>
             <footer class="modal-card-foot">
+                {% if rsvp %}
+                <button type="submit" class="button is-success" disabled>RSVP</button>
+                {% else %}
                 <button type="submit" class="button is-success">RSVP</button>
+                {% endif %}
                 <button type="button" class="button">Cancel</button>
             </footer>
+
             </section>
         </form>
     </div>
@@ -92,8 +97,16 @@ id = "homeBackground" class = "background2"
                 </div>
                 {% endif %}
 
-                <button class="rsvp-button button is-primary ml-3 m-2 js-modal-trigger" data-target="rsvp">RSVP!</button>
-                </div>
+
+            {% if rsvp %}
+            <button id="rsvpButton" class="rsvp-button button is-primary ml-3 m-2 js-modal-trigger" data-target="rsvp"
+                disabled>RSVP!</button>
+            <div class="hide">You have already RSVP'd!</div>
+            {% else %}
+            <button class="rsvp-button button is-primary ml-3 m-2 js-modal-trigger" data-target="rsvp">RSVP!</button>
+            {% endif %}
+
+
         </div>
 
         <div class="column">
