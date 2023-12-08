@@ -73,7 +73,12 @@ body.background2 {
 }
 
 .button {
-   background-color: #00b398;
+   background-color: #af2235 !important;
+}
+
+#login,
+#signup {
+   background-color: #00b398 !important;
 }
 
 .webSection .event {
@@ -86,6 +91,7 @@ body.background2 {
 
 .webSection {
    background-color: white;
+   /* border: solid #9d2235; */
    border-radius: 50px;
    padding: 35px;
    margin: 25px 10px;
