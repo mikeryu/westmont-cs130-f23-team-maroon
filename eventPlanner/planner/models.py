@@ -36,7 +36,7 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 # rsvp class
 # stores a singular RSVP for a given event
 class RSVP(models.Model):

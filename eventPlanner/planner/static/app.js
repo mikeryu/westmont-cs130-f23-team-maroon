@@ -24,7 +24,9 @@ $(document).ready(function () {
 
     console.log(events)
     for (var i in events) {
-      if (events[i].name.includes(inputVal) || events[i].description.includes(inputVal)) {
+      let name = events[i].name.toLowerCase().replace(/[^a-zA-Z]/g, '');
+      let description = events[i].description.toLowerCase().replace(/[^a-zA-Z]/g, '');
+      if (name.toLowerCase().includes(inputVal) || description.toLowerCase().includes(inputVal)) {
         filtered_events.push(events[i])
       }
     }
@@ -81,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openTaskModal($el, id) {
     $el.classList.add('is-active');
-    console.log(id)
     document.getElementById('selector').value = id;
   }
 
