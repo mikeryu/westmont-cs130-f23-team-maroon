@@ -72,9 +72,17 @@ function updateEvents(events) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
+
   // Functions to open and close a modal
   function openModal($el) {
     $el.classList.add('is-active');
+  }
+
+  function openTaskModal($el, id) {
+    $el.classList.add('is-active');
+    console.log(id)
+    document.getElementById('selector').value = id;
   }
 
   function closeModal($el) {
@@ -91,9 +99,13 @@ document.addEventListener('DOMContentLoaded', () => {
   (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
     const modal = $trigger.dataset.target;
     const $target = document.getElementById(modal);
-
+    console.log($trigger)
     $trigger.addEventListener('click', () => {
-      openModal($target);
+      if ($trigger.id == "taskButton") {
+        openTaskModal($target, $trigger.taskId)
+      } else {
+        openModal($target);
+      }
     });
   });
 

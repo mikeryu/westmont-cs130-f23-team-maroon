@@ -74,12 +74,23 @@ body.background2 {
 
 .button {
    background-color: #af2235 !important;
+   color: white;
 }
 
 #login,
 #signup,
 #logoutButton {
    background-color: #00b398 !important;
+}
+
+.task {
+   background-color: #e8e8e8;
+   border-radius: 3px;
+}
+
+#taskButton {
+   background-color: #e8e8e8 !important;
+   color: black !important;
 }
 
 .webSection .event {
@@ -91,6 +102,7 @@ body.background2 {
 }
 
 .webSection {
+   display: flexbox;
    background-color: white;
    /* border: solid #9d2235; */
    border-radius: 50px;

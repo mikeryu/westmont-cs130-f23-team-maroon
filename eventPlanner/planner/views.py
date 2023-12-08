@@ -172,6 +172,12 @@ def manageAccount(request):
     
     return render(request, 'manageAccount.html', {'user': request.user})
 
+@login_required
+def deleteEvent(request):
+    if request.method == "POST":
+        event = Event.objects.get(id=request.POST['eventId'])
+        event.delete()
+        return redirect('myEvents')
 
 
 @login_required
@@ -257,5 +263,3 @@ def signup(request):
         
     return render(request, 'signUp.html')
         
-
-
