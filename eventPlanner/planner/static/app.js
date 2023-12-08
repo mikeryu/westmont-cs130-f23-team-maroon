@@ -11,6 +11,65 @@ $(document).ready(function () {
   });
 });
 
+$(document).ready(function () {
+  const events = JSON.parse(document.getElementById('events-data').textContent);
+
+  updateEvents(events);
+
+  $("#filter").on('input', function () {
+    var inputVal = $(this).val();
+    console.log(inputVal);
+    $("#events").empty();
+    var filtered_events = [];
+
+    console.log(events)
+    for (var i in events) {
+      if (events[i].name.includes(inputVal) || events[i].description.includes(inputVal)) {
+        filtered_events.push(events[i])
+      }
+    }
+    updateEvents(filtered_events);
+  });
+});
+
+function updateEvents(events) {
+  for (var event of events) {
+    var truncate;
+    if (event.name.length < 26) {
+      truncate = "truncate-with-ellipsis2"
+    } else {
+      truncate = "truncate-with-ellipsis"
+    }
+    var htmlContent = `
+            <div class="column is-one-third">
+                <a class="event" href="/event/${event.id}">
+                    <div class="webSection box is-rounded closerCards">
+                        <p class="title is-size-4 webSectionText">${event.name}</p>
+                        <p class="m-1"> <i class="fas fa-user"></i> ${event.user}</p>
+                        <p class="m-1"> <i class="fa-regular fa-calendar-days"></i> ${event.time} on ${event.date}</p>
+                        <div class="webSectionText">
+                                <p class="${truncate}">${event.description}</p>
+                            <br>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        `;
+    // Insert the HTML content into the element with ID "#events"
+    $("#events").append(htmlContent);
+  }
+}
+
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   var myForm = document.getElementById('filterEventForm');
+//   var filter = document.getElementById('filter');
+//   filter.addEventListener('input', () => {
+//     document.getElementById('filterEventForm').submit();
+//   });
+// });
+
 
 document.addEventListener('DOMContentLoaded', () => {
   // Functions to open and close a modal
@@ -62,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
   // Add a click event on each of them
-  $navbarBurgers.forEach( el => {
+  $navbarBurgers.forEach(el => {
     el.addEventListener('click', () => {
 
       // Get the target from the "data-target" attribute
@@ -77,5 +136,4 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
-
 

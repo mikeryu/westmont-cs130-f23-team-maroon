@@ -6,6 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.forms.models import model_to_dict
 from datetime import date
 
 
@@ -37,9 +38,20 @@ here user should be able to see a list of events
 @login_required
 def events(request):
     events = Event.objects.filter(date__gte=date.today()).order_by("date")
-    context = {'events': events, 'user': request.user}
-    return render(request, 'browseEvents.html', context)
+    context = {}
 
+    # if request.method == "POST":
+    #     print("submit")
+    #     search = request.POST["filter"]
+    #     filtered_events = []
+    #     for event in events: 
+    #         if search in event.name or search in event.description:
+    #             filtered_events.append(event)
+    #     context = {'events': [model_to_dict(e) for e in list(events)], 'user': request.user}
+    # else:
+    context = {'events':  [model_to_dict(e) for e in list(events)], 'user': request.user}
+    
+    return render(request, 'browseEvents.html', context)
 
 
 """

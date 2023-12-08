@@ -77,7 +77,8 @@ body.background2 {
 }
 
 #login,
-#signup {
+#signup,
+#logoutButton {
    background-color: #00b398 !important;
 }
 
