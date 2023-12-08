@@ -92,6 +92,19 @@ body.background2 {
    transition: 0.35s;
 }
 
+.navbar {
+   background-color: RGB(175, 34, 53);
+}
+
+.navbar-item {
+   color: white !important;
+}
+
+.navbar-item:hover {
+   color: black !important;
+}
+
+
 .webSection:hover {
    transform: translateY(-10px);
    transition: 0.35s;
