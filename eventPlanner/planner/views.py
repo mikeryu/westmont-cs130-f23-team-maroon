@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.urls import reverse
 from .models import Event, RSVP, Task
 from .forms import RSVPForm
 from django.contrib.auth import authenticate
@@ -177,11 +178,14 @@ def deleteEvent(request):
     if request.method == "POST":
         event = Event.objects.get(id=request.POST['eventId'])
         event.delete()
-        return redirect('myEvents')
+        notification_message = "The event: " + event.name + " was deleted. There is no going back."
+        url = reverse('myEvents') + f'?notification={notification_message}'
+        return redirect(url)
 
 
 @login_required
 def myEvents(request):
+    notification = request.GET.get('notification', None)
     myHostedEvents = Event.objects.filter(user=request.user).order_by("date")
     myRSVP = RSVP.objects.filter(name=request.user)
 
@@ -195,7 +199,7 @@ def myEvents(request):
             tasks.append(rsvp.task)
 
 
-    context = {'myHostedEvents': myHostedEvents, 'myRSVPEvents': myRSVPEvents, 'user': request.user, 'tasks': tasks}
+    context = {'myHostedEvents': myHostedEvents, 'myRSVPEvents': myRSVPEvents, 'user': request.user, 'tasks': tasks, 'notification': notification}
     return render(request, 'myEvents.html', context)
 
 

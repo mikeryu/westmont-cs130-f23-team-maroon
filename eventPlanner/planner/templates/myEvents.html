@@ -7,6 +7,14 @@ id = "homeBackground" class = "background2"
 
 {% block content %}
 
+{% if notification %}
+<div class="notification is-danger is-light" style="margin-top: 60px;">
+    <button class="delete"></button>
+    {{notification}}
+</div>
+{% endif %}
+
+
 <div class="container mt-6 px-2">
     <div class="columns mt-6">
         <div class="column is-one-third">
