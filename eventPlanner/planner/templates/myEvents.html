@@ -8,75 +8,77 @@ id = "homeBackground" class = "background2"
 {% block content %}
 
 <div class="container mt-6 px-2">
-    <div class = "columns mt-6">
-        <div class = "column">
-            <div class = "webSection">
-                <h1 class = "is-size-3 webSectionText"><i class="fa-solid fa-user"></i> My Account</h1>
-                <h1 class = "title webSectionText pt-3">{{user.username}}</h1>
-                <h1 class = "subtitle pt-5">{{user.email}}</h1>
-                <a href = "/logout" class = "button is-primary"> Logout </a>
-                <button class = "button is-info js-modal-trigger" data-target="changeUsername">Change Username</button>
+    <div class="columns mt-6">
+        <div class="column is-one-third">
+            <div class="webSection">
+                <h1 class="is-size-3 webSectionText"><i class="fa-solid fa-user"></i> My Account</h1>
+                <h1 class="title webSectionText pt-3">{{user.username}}</h1>
+                <h1 class="subtitle pt-5">{{user.email}}</h1>
+                <a href="/logout" class="button is-primary"> Logout </a>
+                <button class="button is-info js-modal-trigger" data-target="changeUsername">Change Username</button>
             </div>
 
-            <div class = "webSection">
-                <h1 class = "is-size-3 webSectionText"><i class="fa-solid fa-list-check"></i> Tasks</h1>
+            <div class="webSection">
+                <h1 class="is-size-3 webSectionText"><i class="fa-solid fa-list-check"></i> Tasks</h1>
                 {% for task in tasks %}
-                    <h6 class = "subtitle webSectionText pt-2">
-                        {{task.name}} to {{task.event.name}}
-                    </h6>
-                    {% load humanize %}
-                    <p>Finish by {{task.event.date}}</p>
+                <h6 class="subtitle webSectionText pt-2">
+                    {{task.name}} to {{task.event.name}}
+                </h6>
+                {% load humanize %}
+                <p>Finish by {{task.event.date}}</p>
                 {% empty %}
-                    <h6 class = "subtitle pt-1 webSectionText">
-                        No tasks todo!
-                    </h6>
+                <h6 class="subtitle pt-1 webSectionText">
+                    No tasks todo!
+                </h6>
                 {% endfor %}
 
             </div>
 
         </div>
 
-        <div class = "column">
+        <div class="column">
 
-            <div class = "webSection">
-                <h1 class = "is-size-3 webSectionText"><i class="fa-solid fa-mug-hot"></i> Events I'm Hosting</h1>
+            <div class="webSection">
+                <h1 class="is-size-3 webSectionText"><i class="fa-solid fa-mug-hot"></i> Events I'm Hosting</h1>
                 {% for event in myHostedEvents %}
-                    <div class = "my-4">
-                        <a href={% url "event" event.id%}>
-                            <h6>
-                                <div class = "subtitle webSectionText" >{{event.name}} on {{event.date}}</div>
-                                <i class="fa-solid fa-user"></i> {{event.attendees}} 
-                                {% if event.attendees == 1 %}person{% else %}people{% endif %} signed up
-                                <p {% if  event.completedTasks == event.totalTasks%}style = "color:green;"{% endif %}><i class="fa-solid fa-list-check"></i> {{event.completedTasks}}/{{event.totalTasks}} tasks completed</p>
-                            </h6>
-                        </a>
-                    </div>
-                {%empty%}
-                    <h6 class = "subtitle py-2 webSectionText">
-                        No hosted events!
-                    </h6>
-                {% endfor %}
-                <a class = "button is-primary" href = "{% url 'createEvent' %}">Create Event</a>
-            </div>
-
-
-            <div class = "webSection">
-                <h1 class = "is-size-3 webSectionText"><i class="fa-solid fa-calendar-days"></i> My Upcoming Events </h1>
-                {% for event in myRSVPEvents %}
-                    <a href={% url "event" event.id%}>
-                        <h6 class = "subtitle pt-1 webSectionText" >
-                            {{event.name}} on {{event.date}}
+                <div class="my-4 webSection event">
+                    <a href={% url 'event' event.id%}>
+                        <h6>
+                            <div class="subtitle webSectionText">{{event.name}} on {{event.date}}</div>
+                            <i class="fa-solid fa-user"></i> {{event.attendees}}
+                            {% if event.attendees == 1 %}person{% else %}people{% endif %} signed up
+                            <!-- {% if event.completedTasks == event.totalTasks %} style="color:green;" {% endif %} -->
+                            <p><i class="fa-solid fa-list-check"></i> {{event.completedTasks}}/{{event.totalTasks}}
+                                tasks completed</p>
                         </h6>
                     </a>
-                {% empty %}
-                    <h6 class = "subtitle py-2 webSectionText">
-                        No upcoming events!
-                    </h6>
+                </div>
+                {%empty%}
+                <h6 class="subtitle py-2 webSectionText">
+                    No hosted events!
+                </h6>
                 {% endfor %}
-                <a class = "button is-primary" href = "{% url 'events' %}">Find Events</a>
+                <a class="button is-primary" href="{% url 'createEvent' %}">Create Event</a>
             </div>
 
-           
+
+            <div class="webSection">
+                <h1 class="is-size-3 webSectionText"><i class="fa-solid fa-calendar-days"></i> My Upcoming Events </h1>
+                {% for event in myRSVPEvents %}
+                <a href={% url "event" event.id%}>
+                    <h6 class="subtitle pt-1 webSectionText">
+                        {{event.name}} on {{event.date}}
+                    </h6>
+                </a>
+                {% empty %}
+                <h6 class="subtitle py-2 webSectionText">
+                    No upcoming events!
+                </h6>
+                {% endfor %}
+                <a class="button is-primary" href="{% url 'events' %}">Find Events</a>
+            </div>
+
+
         </div>
 
     </div>
@@ -86,7 +88,7 @@ id = "homeBackground" class = "background2"
 <div class="modal" id="changeUsername">
     <div class="modal-background"></div>
     <div class="modal-card">
-        <form method="post" action = {% url "manageAccount" %}>
+        <form method="post" action={% url "manageAccount" %}>
             {% csrf_token %}
             <header class="modal-card-head">
                 <p class="modal-card-title">Update Username</p>
@@ -94,7 +96,7 @@ id = "homeBackground" class = "background2"
             </header>
             <section class="modal-card-body">
                 {% if error_message %}
-                <p id= "error_message">{{ error_message }}</p>
+                <p id="error_message">{{ error_message }}</p>
                 {% endif %}
                 <div class="field">
                     <p class="control has-icons-left has-icons-right">
