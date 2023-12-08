@@ -7,6 +7,13 @@ id = "homeBackground" class = "background2"
 
 {%block content %}
 
+{% if notification %}
+<div class="notification is-danger is-light" style="margin-top: 60px;">
+    <button class="delete"></button>
+    {{notification}}
+</div>
+{% endif %}
+
 <section class="hero is-primary pt-6">
 
 </section>
@@ -73,8 +80,26 @@ id = "homeBackground" class = "background2"
                 <button type="submit" class="button is-success">Confirm</button>
                 <button type="button" class="button">Cancel</button>
             </footer>
+        </form>
+    </div>
+</div>
 
+<div class="modal" id="unrsvp">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <form method="post" action="{% url 'unrsvp' %}">
+            {% csrf_token %}
+            <header class="modal-card-head">
+                <p class="modal-card-title">Are you sure you want to un-RSVP from this event?</p>
+                <button class="delete" type="button" aria-label="close"></button>
+            </header>
+            <section>
+                <input type="hidden" id="eventId" name="eventId" value="{{event.id}}">
             </section>
+            <footer class="modal-card-foot">
+                <button type="submit" class="button is-success">Confirm</button>
+                <button type="button" class="button">Cancel</button>
+            </footer>
         </form>
     </div>
 </div>
@@ -124,8 +149,7 @@ id = "homeBackground" class = "background2"
 
                 {% if rsvp %}
                 <button id="rsvpButton" class="rsvp-button button is-primary ml-3 m-2 js-modal-trigger"
-                    data-target="rsvp" disabled>RSVP!</button>
-                <div class="hide">You have already RSVP'd!</div>
+                    data-target="unrsvp">Un-RSVP</button>
                 {% else %}
                 <button class="rsvp-button button is-primary ml-3 m-2 js-modal-trigger"
                     data-target="rsvp">RSVP!</button>

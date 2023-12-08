@@ -11,4 +11,5 @@ urlpatterns = [
     path('signup', views.signup, name = 'signUp'),
     path('manageAccount', views.manageAccount, name='manageAccount'),
     path('deleteEvent', views.deleteEvent, name='deleteEvent'),
+    path('unrsvp', views.unrsvp, name='unrsvp'),
 ]

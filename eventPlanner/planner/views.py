@@ -63,7 +63,7 @@ if the user has submitted the RSVP form, save the RSVP to the database
 """
 @login_required
 def event(request, id):
-
+    notification = request.GET.get('notification', None)
     if request.method == "POST":
         guests = request.POST["guests"]
         #grab the task id from the form
@@ -84,12 +84,6 @@ def event(request, id):
 
         task.event.attendees += int(guests)
         task.event.save()
-
-
-
-
-
-
         return redirect('event', id=id)
 
     else: #if the request method is GET, just render the event detail page normally
@@ -109,7 +103,7 @@ def event(request, id):
         for attendee in attendees:
             headCount += attendee.guests + 1
 
-        context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user, 'headCount':headCount, 'rsvp':rsvp }
+        context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user, 'headCount':headCount, 'rsvp':rsvp, 'notification': notification }
         
         return render(request, 'eventDetail.html', context)
 
@@ -181,6 +175,21 @@ def deleteEvent(request):
         notification_message = "The event: " + event.name + " was deleted. There is no going back."
         url = reverse('myEvents') + f'?notification={notification_message}'
         return redirect(url)
+
+@login_required
+def unrsvp(request):
+    if request.method == "POST":
+        event = Event.objects.get(id=request.POST['eventId'])
+        rsvp = RSVP.objects.get(event=event)
+        
+        rsvp.task.completed = False
+        rsvp.task.save()
+        rsvp.delete()
+
+        notification_message = "You successfully Un-RSVP'd from the event: " + event.name
+        url = reverse('event', args=[event.id]) + f'?notification={notification_message}'
+        return redirect(url)
+
 
 
 @login_required
