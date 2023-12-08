@@ -104,19 +104,15 @@ id = "homeBackground" class = "background2"
 </div>
 <br>
 
-<div class="container is-fluid webSectionText">
+<div class="container is-fluid webSectionText" style = "padding-top:48px;">
 
     <div class="webSection noBounce">
-        <div class="container">
             <h1 class="is-size-3 webSectionText">
                 <i class="fa-solid fa-book"></i>
                 View Event
             </h1>
             <p>Here are the details for your event!</p>
-        </div>
-        <div class="container">
 
-        </div>
     </div>
     <div class="columns mt-3">
         <div class="column is-two-thirds">
@@ -172,7 +168,6 @@ id = "homeBackground" class = "background2"
             {% if user == event.user %}
             <div class="webSection closerCards">
                 <h1 class="title is-3 m-2">Manage Your Event</h1>
-                <br>
                 <button class="button is-primary ml-3 m-2 js-modal-trigger" data-target="confirm-delete">Delete
                     Event</button>
             </div>

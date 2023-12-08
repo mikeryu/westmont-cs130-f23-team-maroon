@@ -76,13 +76,14 @@ def event(request, id):
             task = Task(name = "only attend", event  = Event.objects.get(id=id), completed = True)
         task.completed = True
         task.save()
-        task.event.completedTasks += 1
+        if(task.name != "only attend"):
+            task.event.completedTasks += 1
 
         #create the RSVP and save it to the database
         rsvp = RSVP(name=request.user.username, event=task.event, task=task, guests=guests ,rsvp = True)
         rsvp.save()
 
-        task.event.attendees += int(guests)
+        task.event.attendees += int(guests) + 1
         task.event.save()
         return redirect('event', id=id)
 
@@ -183,7 +184,10 @@ def unrsvp(request):
         rsvp = RSVP.objects.get(event=event)
         
         rsvp.task.completed = False
-        rsvp.task.save()
+        if(rsvp.task.name != "only attend"):
+            rsvp.task.save()
+            rsvp.event.completedTasks -= 1
+        rsvp.event.attendees -= 1 + rsvp.guests
         rsvp.delete()
 
         notification_message = "You successfully Un-RSVP'd from the event: " + event.name
