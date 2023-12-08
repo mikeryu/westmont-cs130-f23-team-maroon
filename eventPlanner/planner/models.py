@@ -9,7 +9,6 @@ from django.contrib.auth.models import User
 #descbribes an specifc event with a name, host, data, time, location, and description.
 class Event(models.Model):
     name = models.CharField(max_length=250)
-    host = models.CharField(max_length= 100, default="Joe") #Has a default value because it was implemented later
     date = models.DateField(max_length=100) #Need to be updated to DateField in future release
     time = models.TimeField(max_length=100)  #Need to be updated to TimeField in future release
     location = models.CharField(max_length=100)
@@ -37,7 +36,7 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 # rsvp class
 # stores a singular RSVP for a given event
 # the reasoning behind making a task part of an RSVP instead of the 
@@ -45,9 +44,11 @@ class Task(models.Model):
 class RSVP(models.Model):
     name = models.CharField(max_length=50)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, default=None)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, default=None, null=True)
+    task = models.ForeignKey(Task, on_delete=models.DO_NOTHING, default=None, null=True)
     guests = models.IntegerField(default=0)
+    rsvp = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
+
 

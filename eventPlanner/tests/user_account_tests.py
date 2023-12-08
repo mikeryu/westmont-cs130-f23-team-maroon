@@ -11,6 +11,7 @@ class TestUserAccounts(unittest.TestCase):
         with chrome_driver() as driver: 
             driver.get(self.url)
             driver.find_element(By.ID, "signup").click()
+            print(driver.current_url)
             self.assertEqual(driver.current_url, self.url + "signup")
 
     # Sprint 3: Test Case #2

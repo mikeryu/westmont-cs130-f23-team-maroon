@@ -1,41 +1,39 @@
 {% extends "loggedInBase.html" %}
+{% load humanize %}
+
+{%block class%}
+id = "homeBackground" class = "background2"
+{% endblock %}
 
 {% block content %}
 
-<section class="hero is-primary pt-6">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        <i class="fa-solid fa-calendar-days"></i>
-        Upcoming Events
-      </h1>
-    </div>
-  </div>
+<br>
+<section class="hero pt-6">
+
 </section>
 
 <div class="container">
-  <br>
-  <div class="columns is-multiline">
-    {% for event in events %}
-    <div class="column is-one-third">
-      <a class = "event" href={% url "event" event.id%}>
-        <div class="box is-rounded">
-          <p class="title">{{event.name}}</p>
-          {% if event.name|length < 26 %}
-            <p class="truncate-with-ellipsis2">{{event.description}}</p>
-          {% else %}
-            <p class="truncate-with-ellipsis">{{event.description}}</p>
-          {% endif %}
-
-          
-        </div>
-      </a>
+  <div class="webSection noBounce">
+    <div class="container">
+      <h1 class="is-size-3 webSectionText">
+        <i class="fa-solid fa-calendar-days"></i>
+        All Events
+      </h1>
+      <br>
+      <form id="filterEventForm" action="{% url 'events' %}" method="post">
+        {% csrf_token %}
+        <label class="label">Filter Events:</label>
+        <input id="filter" class="input is-rounded" type="text" placeholder="Search by keyword" name="filter"
+          maxlength="250">
+      </form>
     </div>
-    {% endfor %}
+  </div>
+  {{ events|json_script:"events-data"}}
+  <div id="events" class="columns is-multiline">
+    <!-- injected by app.js -->
   </div>
 </div>
 
 {% load static %}
-<script src="{% static 'app.js' %}"></script>
 
 {% endblock %}

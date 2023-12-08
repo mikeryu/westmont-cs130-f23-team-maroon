@@ -22,7 +22,7 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href={% url "home" %}>
-        <img src="{% static "logoCropped.png" %}" id="navbarLogo">
+        <img src="{% static "logo.png" %}" id="navbarLogo">
       </a>
 
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -54,8 +54,8 @@
               <strong>Sign up</strong>
             </a>
 
-            <a href="{% url 'loginPage' %}" class="button is-light" id="login">
-              Log in
+            <a href="{% url 'loginPage' %}" class="button is-primary" id="login">
+              <strong>Log in</strong>
             </a>
           </div>
         </div>
