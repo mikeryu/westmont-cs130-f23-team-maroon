@@ -36,13 +36,13 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 # rsvp class
 # stores a singular RSVP for a given event
 class RSVP(models.Model):
     name = models.CharField(max_length=50)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, default=None)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, default=None, null=True)
+    task = models.ForeignKey(Task, on_delete=models.DO_NOTHING, default=None, null=True)
     guests = models.IntegerField(default=0)
     rsvp = models.BooleanField(default=False)
 

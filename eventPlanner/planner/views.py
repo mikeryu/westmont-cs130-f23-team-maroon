@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.urls import reverse
 from .models import Event, RSVP, Task
 from .forms import RSVPForm
 from django.contrib.auth import authenticate
@@ -6,6 +7,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.forms.models import model_to_dict
 from datetime import date
 
 
@@ -37,9 +39,20 @@ here user should be able to see a list of events
 @login_required
 def events(request):
     events = Event.objects.filter(date__gte=date.today()).order_by("date")
-    context = {'events': events, 'user': request.user}
-    return render(request, 'browseEvents.html', context)
+    context = {}
 
+    # if request.method == "POST":
+    #     print("submit")
+    #     search = request.POST["filter"]
+    #     filtered_events = []
+    #     for event in events: 
+    #         if search in event.name or search in event.description:
+    #             filtered_events.append(event)
+    #     context = {'events': [model_to_dict(e) for e in list(events)], 'user': request.user}
+    # else:
+    context = {'events':  [model_to_dict(e) for e in list(events)], 'user': request.user}
+    
+    return render(request, 'browseEvents.html', context)
 
 
 """
@@ -50,7 +63,7 @@ if the user has submitted the RSVP form, save the RSVP to the database
 """
 @login_required
 def event(request, id):
-
+    notification = request.GET.get('notification', None)
     if request.method == "POST":
         guests = request.POST["guests"]
         #grab the task id from the form
@@ -71,12 +84,6 @@ def event(request, id):
 
         task.event.attendees += int(guests)
         task.event.save()
-
-
-
-
-
-
         return redirect('event', id=id)
 
     else: #if the request method is GET, just render the event detail page normally
@@ -96,7 +103,7 @@ def event(request, id):
         for attendee in attendees:
             headCount += attendee.guests + 1
 
-        context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user, 'headCount':headCount, 'rsvp':rsvp }
+        context = {'event': event, 'attendees': attendees, 'tasks': tasks, 'user': request.user, 'headCount':headCount, 'rsvp':rsvp, 'notification': notification }
         
         return render(request, 'eventDetail.html', context)
 
@@ -160,10 +167,34 @@ def manageAccount(request):
     
     return render(request, 'manageAccount.html', {'user': request.user})
 
+@login_required
+def deleteEvent(request):
+    if request.method == "POST":
+        event = Event.objects.get(id=request.POST['eventId'])
+        event.delete()
+        notification_message = "The event: " + event.name + " was deleted. There is no going back."
+        url = reverse('myEvents') + f'?notification={notification_message}'
+        return redirect(url)
+
+@login_required
+def unrsvp(request):
+    if request.method == "POST":
+        event = Event.objects.get(id=request.POST['eventId'])
+        rsvp = RSVP.objects.get(event=event)
+        
+        rsvp.task.completed = False
+        rsvp.task.save()
+        rsvp.delete()
+
+        notification_message = "You successfully Un-RSVP'd from the event: " + event.name
+        url = reverse('event', args=[event.id]) + f'?notification={notification_message}'
+        return redirect(url)
+
 
 
 @login_required
 def myEvents(request):
+    notification = request.GET.get('notification', None)
     myHostedEvents = Event.objects.filter(user=request.user).order_by("date")
     myRSVP = RSVP.objects.filter(name=request.user)
 
@@ -177,7 +208,7 @@ def myEvents(request):
             tasks.append(rsvp.task)
 
 
-    context = {'myHostedEvents': myHostedEvents, 'myRSVPEvents': myRSVPEvents, 'user': request.user, 'tasks': tasks}
+    context = {'myHostedEvents': myHostedEvents, 'myRSVPEvents': myRSVPEvents, 'user': request.user, 'tasks': tasks, 'notification': notification}
     return render(request, 'myEvents.html', context)
 
 
@@ -245,5 +276,3 @@ def signup(request):
         
     return render(request, 'signUp.html')
         
-
-
