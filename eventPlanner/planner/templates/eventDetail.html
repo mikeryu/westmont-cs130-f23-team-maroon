@@ -90,7 +90,7 @@ id = "homeBackground" class = "background2"
             {% csrf_token %}
             <header class="modal-card-head">
                 <p class="modal-card-title">Are you sure you want to un-RSVP from this event?</p>
-                <button class="delete" type="button" aria-label="close"></button>
+                <button class="delete" id = "unRSVPconf" type="button" aria-label="close"></button>
             </header>
             <section>
                 <input type="hidden" id="eventId" name="eventId" value="{{event.id}}">
@@ -168,7 +168,7 @@ id = "homeBackground" class = "background2"
             {% if user == event.user %}
             <div class="webSection closerCards">
                 <h1 class="title is-3 m-2">Manage Your Event</h1>
-                <button class="button is-primary ml-3 m-2 js-modal-trigger" data-target="confirm-delete">Delete
+                <button class="button is-primary ml-3 m-2 js-modal-trigger" id="deleteButton" data-target="confirm-delete">Delete
                     Event</button>
             </div>
             {% endif %}
